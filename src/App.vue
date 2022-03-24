@@ -36,7 +36,7 @@ export default {
 main {
     margin: 0 auto;
     width: min(100%, 90rem);
-    padding: 4rem;
+    padding: 6rem;
     display: flex;
     flex-direction: column;
     gap: 10rem;

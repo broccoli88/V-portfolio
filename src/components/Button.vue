@@ -20,6 +20,7 @@ export default {};
 
     background: transparent;
     border: 0;
+    outline: none;
 
     position: relative;
     transition: all 0.5s ease;
@@ -57,12 +58,14 @@ button::after {
     transition: all 0.5s ease;
 }
 
-button:hover::before {
+button:hover::before,
+button:focus::before {
     width: 90%;
     height: 90%;
 }
 
-button:hover::after {
+button:hover::after,
+button:focus::after {
     width: 90%;
     height: 90%;
 }

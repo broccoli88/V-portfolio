@@ -70,7 +70,7 @@ export default {
 
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    gap: 3rem;
 
     position: relative;
 }
@@ -131,10 +131,11 @@ export default {
         display: flex;
         gap: 6rem;
         flex-wrap: wrap;
+        justify-content: space-around;
     }
 
     .project {
-        width: 45%;
+        width: 40%;
     }
 }
 </style>
