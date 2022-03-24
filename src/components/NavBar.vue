@@ -1,61 +1,67 @@
+
 <template>
-    <nav>
-        <div class="nav">
-            <div class="logo">PJ</div>
-            <Icon
-                @click="toggleNav"
-                icon="bx:menu-alt-right"
-                color="#909"
-                width="40"
-                height="40"
-                class="burger"
-                :rotate="4"
-            />
-            <transition name="switch">
-                <transition-group
-                    appear
-                    tag="ul"
-                    class="nav__links"
-                    v-show="showNav"
-                    name="links"
-                >
-                    <li v-for="(link, index) in links" :key="index">
-                        <a href="#">{{ link }}</a>
-                    </li>
-                </transition-group>
-            </transition>
-        </div>
+    <nav class="nav">
+        <div class="logo">PJ</div>
+
+        <ul class="nav__links" v-show="!showNavIcon">
+            <li v-for="(link, index) in links" :key="index">
+                <a class="link" href="#">{{ link }}</a>
+            </li>
+        </ul>
+
+        <Icon
+            @click="toggleNavMobile"
+            v-show="showNavIcon"
+            icon="bx:menu-alt-right"
+            color="#909"
+            width="40"
+            height="40"
+            class="burger"
+            :rotate="4"
+        />
+
+        <transition name="nav-slide" appear>
+            <ul class="nav__mobile" v-show="showNavMobile">
+                <li v-for="(link, index) in links" :key="index">
+                    <a class="link__mobile" href="#">{{ link }}</a>
+                </li>
+            </ul>
+        </transition>
     </nav>
 </template>
 
 <script>
 import { Icon } from "@iconify/vue";
-
 export default {
     components: { Icon },
     data() {
         return {
+            showNavIcon: true,
+            showNavMobile: false,
             showNav: false,
+            windowWidth: null,
             links: ["About Me", "Projects", "Contact", "Resume"],
         };
     },
+
+    created() {
+        window.addEventListener("resize", this.checkWindowWidth);
+    },
+
     methods: {
-        toggleNav() {
-            const links = document.querySelectorAll(".nav__links li");
+        checkWindowWidth() {
+            this.windowWidth = window.innerWidth;
+            if (this.windowWidth < 600) {
+                this.showNavIcon = true;
+                return;
+            }
+            this.showNavIcon = false;
+            this.showNavMobile = false;
+            return;
+        },
 
-            this.showNav = !this.showNav;
-
-            links.forEach((link, index) => {
-                if (link.style.animation.includes("navLinkShow")) {
-                    link.style.animation = `navLinkFade 0.4s ease backwards ${
-                        index / 8
-                    }s`;
-                } else {
-                    link.style.animation = `navLinkShow 0.4s ease forwards ${
-                        index / 7 + 0.5
-                    }s`;
-                }
-            });
+        toggleNavMobile() {
+            this.showNavMobile = !this.showNavMobile;
         },
     },
 };
@@ -63,7 +69,8 @@ export default {
 
 <style>
 .nav {
-    padding: 2rem;
+    width: 100%;
+    padding: 1em 2em;
 
     display: flex;
     justify-content: space-between;
@@ -71,114 +78,76 @@ export default {
     position: relative;
 }
 
-.burger {
-    position: absolute;
-    top: 1rem;
-    right: 2rem;
-    z-index: 9999;
+.nav__links {
+    width: 100%;
 
-    cursor: pointer;
+    list-style: none;
+
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+
+    gap: clamp(4rem, 8%, 6rem);
 }
 
-.nav__links {
-    width: 70%;
+.link,
+.link__mobile {
+    text-decoration: none;
+    font-family: "Bebas Neue", cursive;
+    color: var(--color-primary);
+}
+
+.link:hover,
+.link__mobile:hover {
+    color: var(--color-secondary);
+}
+
+.nav__mobile {
+    width: min(100%, 300px);
     height: 100vh;
+    list-style: none;
 
-    padding: 0 8rem 0 10rem;
-    background: hsl(0, 0%, 20%, 0.5);
+    background: hsl(0, 0%, 18%, 1);
     border: 1px solid black;
-
     box-shadow: 0 0 15px black;
 
-    list-style-type: none;
-    font-family: "Bebas Neue", cursive;
+    font-size: 140%;
 
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
     gap: 4rem;
 
-    position: absolute;
+    position: fixed;
     top: 0;
     right: 0;
+    z-index: 10;
 }
 
-.nav__links li a {
-    text-decoration: none;
-    color: var(--color-primary);
-    font-size: 2.5rem;
+.burger {
+    cursor: pointer;
+
+    position: fixed;
+    top: 1.5rem;
+    right: 3rem;
+    z-index: 9999;
 }
 
-.nav__links li {
-    transform: translateX(200px);
+.nav-slide-enter-from,
+.nav-slide-leave-to {
+    transform: translateX(300px);
     opacity: 0;
 }
 
-.switch-enter-from,
-.switch-leave-to {
-    transform: translate(100vw);
-    opacity: 0;
+.nav-slide-enter-to,
+.nav-slide-leave-from {
+    transform: translateX(0);
+    opacity: 1;
 }
 
-.switch-enter-active {
-    transition: all 0.5s ease-in;
-}
-
-.switch-leave-active {
-    transition: all 1s ease-in;
-}
-
-@keyframes navLinkShow {
-    0% {
-        transform: translate(200px);
-        opacity: 0;
-    }
-    100% {
-        transform: translate(0);
-        opacity: 1;
-    }
-}
-
-@keyframes navLinkFade {
-    0% {
-        transform: translate(0px);
-        opacity: 1;
-    }
-    100% {
-        transform: translate(200px);
-        opacity: 0;
-    }
-}
-
-@media (min-width: 600px) {
-    .burger {
-        display: none;
-    }
-
-    .nav__links {
-        width: initial;
-        height: fit-content;
-
-        padding: 0.5em 3rem;
-
-        box-shadow: none;
-        border: 0;
-        background-color: inherit;
-
-        font-size: clamp(1.6rem, 1.9vw, 2.2rem);
-
-        position: inherit;
-        display: flex;
-        flex-direction: row;
-    }
-
-    .nav__links li {
-        transform: none;
-        opacity: 1;
-    }
-
-    .nav__links li a {
-        font-size: clamp(1.8rem, 2.2vw, 2.4rem);
-    }
+.nav-slide-enter-active,
+.nav-slide-leave-active {
+    transition: all 0.6s ease;
 }
 </style>
