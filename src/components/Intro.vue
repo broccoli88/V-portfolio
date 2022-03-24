@@ -17,8 +17,7 @@ export default {};
 
 <style>
 .intro {
-    width: max-content;
-    margin: 2rem auto;
+    margin: 2rem 0;
 }
 
 .intro__greeting {

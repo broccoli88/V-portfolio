@@ -1,0 +1,24 @@
+{
+  "projects": [
+    {
+      "title": "TicTacToe",
+      "body": " Lorem ipsum dolor sit ametconsectetur, adipisicingelit. Natus eius voluptate explicabo. Atque asperiores odit",
+      "technologies": "JS, Vue"
+    },
+    {
+      "title": "Carousel",
+      "body": " Lorem ipsum dolor sit ametconsectetur, adipisicingelit. Natus eius voluptate explicabo. Atque asperiores odit",
+      "technologies": "JS, Vue"
+    },
+    {
+      "title": "Library",
+      "body": " Lorem ipsum dolor sit ametconsectetur, adipisicingelit. Natus eius voluptate explicabo. Atque asperiores odit",
+      "technologies": "JS, Vue"
+    },
+    {
+      "title": "Library",
+      "body": " Lorem ipsum dolor sit ametconsectetur, adipisicingelit. Natus eius voluptate explicabo. Atque asperiores odit",
+      "technologies": "JS, Vue"
+    }
+  ]
+}

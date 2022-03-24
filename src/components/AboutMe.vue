@@ -11,19 +11,25 @@
             <figure class="about__img">
                 <img src="../assets/Pawel_Jaromin.jpeg" alt="" />
             </figure>
+            <Button class="show-more">
+                <span>Show More</span>
+            </Button>
         </section>
     </article>
 </template>
 
 <script>
-export default {};
+import Button from "./Button.vue";
+export default {
+    components: { Button },
+};
 </script>
 
 <style>
 .about {
-    width: min(100%, 90rem);
     position: relative;
-    margin: 2rem;
+    display: flex;
+    flex-direction: column;
 }
 
 .about::before {
@@ -55,7 +61,7 @@ export default {};
 }
 
 .about__description {
-    width: fit-content;
+    width: 100%;
     display: flex;
     flex-direction: column;
     gap: 3rem;
@@ -68,11 +74,18 @@ export default {};
 .about__img {
     width: min(30%, 300px);
     aspect-ratio: 1;
+    align-self: flex-end;
 }
 
 .about__img img {
     width: 100%;
     object-fit: cover;
+}
+
+.show-more {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
 }
 
 @media (min-width: 600px) {

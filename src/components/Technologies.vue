@@ -11,6 +11,7 @@
                     height="50"
                     :inline="true"
                 />
+                <figcaption>HTML</figcaption>
             </figure>
             <figure>
                 <Icon
@@ -20,6 +21,7 @@
                     height="50"
                     :inline="true"
                 />
+                <figcaption>CSS</figcaption>
             </figure>
             <figure>
                 <Icon
@@ -29,6 +31,7 @@
                     height="50"
                     :inline="true"
                 />
+                <figcaption>JavaScript</figcaption>
             </figure>
             <figure>
                 <Icon
@@ -38,6 +41,7 @@
                     height="50"
                     :inline="true"
                 />
+                <figcaption>Node.JS</figcaption>
             </figure>
             <figure>
                 <Icon
@@ -47,6 +51,7 @@
                     height="50"
                     :inline="true"
                 />
+                <figcaption>Vue</figcaption>
             </figure>
             <figure>
                 <Icon
@@ -56,6 +61,7 @@
                     height="50"
                     :inline="true"
                 />
+                <figcaption>Git</figcaption>
             </figure>
         </section>
     </article>
@@ -71,8 +77,8 @@ export default {
 
 <style>
 .technologies {
-    width: min(calc(100% - 4rem), 90rem);
-    margin: 2rem;
+    width: min(100%, 90rem);
+    margin: 2rem 0;
     position: relative;
 }
 
@@ -84,6 +90,8 @@ export default {
 
     border-top: 1px solid var(--color-primary);
     border-left: 1px solid var(--color-primary);
+
+    pointer-events: none;
 
     position: absolute;
     top: -10px;
@@ -99,6 +107,8 @@ export default {
     border-bottom: 1px solid var(--color-primary);
     border-right: 1px solid var(--color-primary);
 
+    pointer-events: none;
+
     position: absolute;
     bottom: -10px;
     right: -10px;
@@ -109,5 +119,21 @@ export default {
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
+}
+
+.icons figure {
+    width: min(110px, 30%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.icons figure:hover {
+    filter: brightness(130%);
+}
+
+.icons figure:hover figcaption {
+    font-weight: 600;
 }
 </style>

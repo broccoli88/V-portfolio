@@ -51,5 +51,5 @@ h2 {
 }
 
 h3 {
-  font-size: clamp(2.5rem, 4vw, 5rem);
+  font-size: clamp(2.5rem, 3.2vw, 3.5rem);
 }
