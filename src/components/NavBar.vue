@@ -43,7 +43,6 @@
                     class="nav__mobile"
                     @before-enter="beforeEnter"
                     @enter="enter"
-                    @before-leave="beforeLeave"
                 >
                     <li
                         v-for="(link, index) in links"
@@ -54,15 +53,20 @@
                     </li>
                 </transition-group>
             </transition>
+
+            <section v-if="showNavMobile">
+                <Media class="media-nav" />
+            </section>
         </nav>
     </header>
 </template>
 
 <script>
+import Media from "./Media.vue";
 import gsap from "gsap";
 import { Icon } from "@iconify/vue";
 export default {
-    components: { Icon },
+    components: { Icon, Media },
 
     data() {
         return {
@@ -147,6 +151,13 @@ export default {
 </script>
 
 <style>
+.media-nav {
+    position: absolute;
+    bottom: -80vh;
+    right: 75px;
+    z-index: 11;
+}
+
 .scroll-down {
     transform: translateY(-100%);
 }
@@ -250,8 +261,7 @@ link::before {
 }
 
 .nav-slide-leave-active {
-    animation: navWait 0.4s ease;
-    /* animation-delay: 0.4s; */
+    animation: navWait 0.6s ease;
 }
 
 @keyframes navWait {
@@ -262,7 +272,7 @@ link::before {
 
     to {
         opacity: 0;
-        transform: translateX(80px);
+        transform: translateX(300px);
     }
 }
 

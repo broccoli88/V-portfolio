@@ -17,6 +17,7 @@ import AboutMe from "./components/AboutMe.vue";
 import Technologies from "./components/Technologies.vue";
 import Projects from "./components/Projects.vue";
 import ContactForm from "./components/ContactForm.vue";
+import Media from "./components/Media.vue";
 
 export default {
     name: "App",
@@ -27,6 +28,7 @@ export default {
         Technologies,
         Projects,
         ContactForm,
+        Media,
     },
 };
 </script>
@@ -35,7 +37,7 @@ export default {
 main {
     margin: 0 auto;
     width: min(100%, 100rem);
-    padding: 6rem;
+    padding: 5rem;
     display: flex;
     flex-direction: column;
     gap: 10rem;

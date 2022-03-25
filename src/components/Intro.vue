@@ -24,6 +24,9 @@ export default {};
     color: var(--color-accent);
     font-size: clamp(3rem, 4.5vw, 6rem);
     font-weight: 600;
+
+    display: flex;
+    flex-direction: column;
 }
 
 .intro h2 {
@@ -32,7 +35,9 @@ export default {};
 }
 
 .intro__description {
-    width: 60ch;
+    flex: 1;
+    max-width: 80ch;
+    font-size: clamp(2rem, 2.4vw, 2.5rem);
 }
 
 @media (min-width: 600px) {

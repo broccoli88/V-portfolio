@@ -2,26 +2,45 @@
     <article class="about">
         <h2>About Me</h2>
         <section class="about__description">
-            <p>
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dicta
-                vero expedita labore quam at obcaecati sed nihil. Culpa, non,
-                voluptatem labore natus porro maxime consectetur sapiente enim
-                totam, molestias assumenda?
-            </p>
+            <div class="about__text">
+                <transition name="show-text" mode="out-in">
+                    <p v-if="showSnippet">{{ aboutMeSnippet }}</p>
+                    <p v-else>{{ aboutMe }}</p>
+                </transition>
+                <Button class="show-more" @click="toggleAbout">
+                    <span>Show More</span>
+                </Button>
+            </div>
             <figure class="about__img">
                 <img src="../assets/Pawel_Jaromin.jpeg" alt="" />
             </figure>
-            <Button class="show-more">
-                <span>Show More</span>
-            </Button>
         </section>
     </article>
 </template>
 
 <script>
 import Button from "./Button.vue";
+import textAboutMe from "../../Data/about-me";
 export default {
     components: { Button },
+    data() {
+        return {
+            showSnippet: true,
+            aboutMe: textAboutMe.aboutMe,
+        };
+    },
+
+    methods: {
+        toggleAbout() {
+            this.showSnippet = !this.showSnippet;
+        },
+    },
+
+    computed: {
+        aboutMeSnippet() {
+            return this.aboutMe.substring(0, 120) + "...";
+        },
+    },
 };
 </script>
 
@@ -71,21 +90,39 @@ export default {
     width: 60ch;
 }
 
+.about__text {
+    flex: 1;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
 .about__img {
-    width: min(30%, 300px);
-    aspect-ratio: 1;
-    align-self: flex-end;
+    flex: 1;
+    max-width: 150px;
+    height: 100%;
 }
 
 .about__img img {
     width: 100%;
     object-fit: cover;
+    background-color: var(--color-primary);
 }
 
 .show-more {
-    position: absolute;
-    bottom: 10px;
-    left: 10px;
+    align-self: center;
+    margin: 3rem 0;
+}
+
+.show-text-enter-from,
+.show-text-leave-to {
+    opacity: 0;
+}
+
+.show-text-enter-active,
+.show-text-leave-active {
+    transition: all 0.3s ease-in;
 }
 
 @media (min-width: 600px) {
