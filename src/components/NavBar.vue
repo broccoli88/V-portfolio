@@ -1,44 +1,78 @@
 
 <template>
-    <nav class="nav">
-        <div class="logo">PJ</div>
-
-        <ul class="nav__links" v-show="!showNavIcon">
-            <li v-for="(link, index) in links" :key="index">
-                <a class="link" href="#">{{ link }}</a>
-            </li>
-        </ul>
-
-        <Icon
-            @click="toggleNavMobile"
-            v-show="showNavIcon"
-            icon="bx:menu-alt-right"
-            color="#909"
-            width="40"
-            height="40"
-            class="burger"
-            :rotate="4"
-        />
-
-        <transition name="nav-slide" appear>
-            <ul class="nav__mobile" v-show="showNavMobile">
+    <header
+        @scroll="toggleNavbar"
+        :class="{ 'scroll-up': scrolledUp, 'scroll-down': scrolledDown }"
+    >
+        <nav class="nav">
+            <div class="logo">PJ</div>
+            <ul class="nav__links" v-show="!showNavIcon">
                 <li v-for="(link, index) in links" :key="index">
-                    <a class="link__mobile" href="#">{{ link }}</a>
+                    <a class="link" href="#">{{ link }}</a>
                 </li>
             </ul>
-        </transition>
-    </nav>
+            <transition name="switch" mode="out-in">
+                <Icon
+                    @click="slideNavMobile"
+                    v-if="changeIcon"
+                    v-show="showNavIcon"
+                    icon="bx:menu-alt-right"
+                    color="#909"
+                    width="40"
+                    height="40"
+                    class="burger"
+                    :rotate="4"
+                />
+                <Icon
+                    class="close-burger"
+                    @click="hideNavMobile"
+                    v-show="showNavIcon"
+                    v-else
+                    icon="emojione-monotone:heavy-multiplication-x"
+                    color="purple"
+                    width="25"
+                    height="25"
+                    :inline="true"
+                />
+            </transition>
+            <transition name="nav-slide">
+                <transition-group
+                    tag="ul"
+                    appear
+                    v-if="showNavMobile"
+                    class="nav__mobile"
+                    @before-enter="beforeEnter"
+                    @enter="enter"
+                    @before-leave="beforeLeave"
+                >
+                    <li
+                        v-for="(link, index) in links"
+                        :key="link"
+                        :data-index="index"
+                    >
+                        <a class="link__mobile" href="#">{{ link }}</a>
+                    </li>
+                </transition-group>
+            </transition>
+        </nav>
+    </header>
 </template>
 
 <script>
+import gsap from "gsap";
 import { Icon } from "@iconify/vue";
 export default {
     components: { Icon },
+
     data() {
         return {
-            showNavIcon: true,
-            showNavMobile: false,
-            showNav: false,
+            scrolledDown: false,
+            scrolledUp: false,
+            previousScroll: 0,
+            changeIcon: true,
+            showNavIcon: null,
+            showNavMobile: null,
+            showNav: null,
             windowWidth: null,
             links: ["About Me", "Projects", "Contact", "Resume"],
         };
@@ -46,28 +80,81 @@ export default {
 
     created() {
         window.addEventListener("resize", this.checkWindowWidth);
+        this.checkWindowWidth();
+    },
+
+    mounted() {
+        window.addEventListener("scroll", this.toggleNavbar);
     },
 
     methods: {
+        toggleNavbar() {
+            if (window.innerWidth >= 600) {
+                const currentScroll = window.scrollY;
+                if (currentScroll <= 0) {
+                    this.scrolledDown = false;
+                    this.scrolledUp = false;
+                } else if (currentScroll > this.previousScroll) {
+                    this.scrolledDown = true;
+                    this.scrolledUp = false;
+                } else if (currentScroll < this.previousScroll) {
+                    this.scrolledDown = false;
+                    this.scrolledUp = true;
+                }
+
+                this.previousScroll = currentScroll;
+            }
+        },
+
+        beforeEnter(el) {
+            el.style.opacity = 0;
+            el.style.transform = "translateX(80px)";
+        },
+
+        enter(el, done) {
+            gsap.to(el, {
+                opacity: 1,
+                x: 0,
+                delay: 0.4 + el.dataset.index * 0.1,
+                onComplete: done,
+            });
+        },
+
         checkWindowWidth() {
             this.windowWidth = window.innerWidth;
             if (this.windowWidth < 600) {
                 this.showNavIcon = true;
+                this.changeIcon = true;
                 return;
             }
             this.showNavIcon = false;
             this.showNavMobile = false;
+
             return;
         },
 
-        toggleNavMobile() {
+        slideNavMobile() {
             this.showNavMobile = !this.showNavMobile;
+            this.changeIcon = !this.changeIcon;
+        },
+
+        hideNavMobile() {
+            this.showNavMobile = !this.showNavMobile;
+            this.changeIcon = !this.changeIcon;
         },
     },
 };
 </script>
 
 <style>
+.scroll-down {
+    transform: translateY(-100%);
+}
+
+.scroll-up {
+    box-shadow: 0 0 8px hsl(0, 0%, 5%, 0.5);
+}
+
 .nav {
     width: 100%;
     padding: 1em 2em;
@@ -95,10 +182,20 @@ export default {
     text-decoration: none;
     font-family: "Bebas Neue", cursive;
     color: var(--color-primary);
+    outline: none;
+}
+
+link::before {
+    content: "";
+    display: inline-block;
+    width: 1%;
+    height: 1%;
 }
 
 .link:hover,
-.link__mobile:hover {
+.link:focus,
+.link__mobile:hover,
+.link__mobile:focus {
     color: var(--color-secondary);
 }
 
@@ -125,29 +222,76 @@ export default {
     z-index: 10;
 }
 
-.burger {
+.burger,
+.close-burger {
     cursor: pointer;
 
     position: fixed;
-    top: 1.5rem;
-    right: 3rem;
     z-index: 9999;
 }
 
-.nav-slide-enter-from,
-.nav-slide-leave-to {
+.burger {
+    top: 1.5rem;
+    right: 1rem;
+}
+
+.close-burger {
+    top: 2.25rem;
+    right: 1.6rem;
+}
+
+.nav-slide-enter-from {
     transform: translateX(300px);
     opacity: 0;
 }
 
-.nav-slide-enter-to,
-.nav-slide-leave-from {
-    transform: translateX(0);
+.nav-slide-enter-active {
+    transition: all 0.6s ease;
+}
+
+.nav-slide-leave-active {
+    animation: navWait 0.4s ease;
+    /* animation-delay: 0.4s; */
+}
+
+@keyframes navWait {
+    from {
+        opacity: 1;
+        transform: translateX(0px);
+    }
+
+    to {
+        opacity: 0;
+        transform: translateX(80px);
+    }
+}
+
+.switch-enter-from,
+.switch-leave-to {
+    opacity: 0;
+}
+
+.switch-enter-to,
+.switch-leave-from {
     opacity: 1;
 }
 
-.nav-slide-enter-active,
-.nav-slide-leave-active {
-    transition: all 0.6s ease;
+.switch-enter-active,
+.switch-leave-active {
+    transition: all 0.4s ease;
+}
+
+@media (min-width: 600px) {
+    header {
+        width: 100%;
+        height: 3.5em;
+
+        position: fixed;
+        z-index: 8888;
+
+        background-color: var(--color-bg);
+
+        transition: all 0.3s ease-in-out;
+    }
 }
 </style>

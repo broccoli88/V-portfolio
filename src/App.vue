@@ -1,7 +1,6 @@
 <template>
-    <header>
-        <NavBar />
-    </header>
+    <NavBar />
+
     <main>
         <Intro />
         <AboutMe />
@@ -35,7 +34,7 @@ export default {
 <style>
 main {
     margin: 0 auto;
-    width: min(100%, 90rem);
+    width: min(100%, 100rem);
     padding: 6rem;
     display: flex;
     flex-direction: column;
