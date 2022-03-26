@@ -20,7 +20,7 @@ export default {};
 
     position: fixed;
     bottom: 30%;
-    right: clamp(10px, 2vw, 4rem);
+    right: clamp(12px, 2vw, 4rem);
     z-index: 11;
     cursor: pointer;
 }
@@ -38,7 +38,7 @@ export default {};
 
     position: absolute;
     top: -5rem;
-    right: 1px;
+    right: -1px;
     z-index: 10;
 }
 
@@ -60,10 +60,10 @@ export default {};
 }
 
 .mail {
-    font-size: 2.5rem;
-    height: 30rem;
+    font-size: 2rem;
+    height: 28rem;
     writing-mode: vertical-lr;
-    letter-spacing: 1.5px;
+    letter-spacing: 3px;
     line-height: 1;
     font-weight: 500;
 }

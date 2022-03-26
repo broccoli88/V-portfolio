@@ -56,11 +56,6 @@ export default {
 
     display: flex;
     gap: 3rem;
-
-    position: absolute;
-    bottom: -80vh;
-    right: 75px;
-    z-index: 9999;
 }
 
 .media > figure {

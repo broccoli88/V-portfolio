@@ -1,4 +1,4 @@
-import { createApp } from "vue";
+import { createApp, VueElement, withDirectives } from "vue";
 import App from "./App.vue";
 import "./assets/body.css";
 

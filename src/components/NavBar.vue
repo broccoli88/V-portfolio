@@ -7,11 +7,13 @@
     >
         <nav class="nav">
             <div class="logo">PJ</div>
-            <ul class="nav__links" v-show="!showNavIcon">
-                <li v-for="(link, index) in links" :key="index">
-                    <a class="link" href="#">{{ link }}</a>
-                </li>
-            </ul>
+            <transition name="wide-nav-fade" mode="out-in">
+                <ul class="nav__links" v-show="!showNavIcon">
+                    <li v-for="(link, index) in links" :key="index">
+                        <a class="link" href="#">{{ link }}</a>
+                    </li>
+                </ul>
+            </transition>
             <transition name="switch" mode="out-in">
                 <Icon
                     @click="slideNavMobile"
@@ -36,27 +38,30 @@
                     :inline="true"
                 />
             </transition>
-            <transition name="nav-slide">
-                <transition-group
-                    tag="ul"
-                    appear
-                    v-if="showNavMobile"
-                    class="nav__mobile"
-                    @before-enter="beforeEnter"
-                    @enter="enter"
-                >
-                    <li
-                        v-for="(link, index) in links"
-                        :key="link"
-                        :data-index="index"
+            <div class="list-container">
+                <transition name="nav-slide">
+                    <transition-group
+                        tag="ul"
+                        appear
+                        v-if="showNavMobile"
+                        class="nav__mobile"
+                        @before-enter="beforeEnter"
+                        @enter="enter"
                     >
-                        <a class="link__mobile" href="#">{{ link }}</a>
-                    </li>
-                    <transition name="nav-icons" v-if="showNavMobile" appear>
-                        <Media />
-                    </transition>
-                </transition-group>
-            </transition>
+                        <li
+                            v-for="(link, index) in links"
+                            :key="link"
+                            :data-index="index"
+                        >
+                            <a class="link__mobile" href="#">{{ link }}</a>
+                        </li>
+                    </transition-group>
+                </transition>
+
+                <transition name="nav-icons" v-if="showNavMobile" appear>
+                    <Media class="nav__icons" />
+                </transition>
+            </div>
         </nav>
     </header>
 </template>
@@ -166,7 +171,7 @@ export default {
     display: flex;
     justify-content: space-between;
 
-    position: relative;
+    /* position: relative; */
 }
 
 .nav__links {
@@ -179,6 +184,17 @@ export default {
     align-items: center;
 
     gap: clamp(4rem, 8%, 6rem);
+}
+
+.list-container {
+    position: relative;
+}
+
+.nav__icons {
+    position: fixed;
+    top: 80vh;
+    right: 75px;
+    z-index: 9999;
 }
 
 .link,
@@ -313,6 +329,18 @@ link::before {
         opacity: 1;
     }
 }
+
+.wide-nav-fade-enter-from,
+.wide-nav-fade-leave-to {
+    opacity: 0;
+    transform: translateY(-80px);
+}
+
+.wide-nav-fade-enter-active,
+.wide-nav-fade-leave-active {
+    transition: all 0.4s ease;
+}
+
 @media (min-width: 600px) {
     header {
         width: 100%;

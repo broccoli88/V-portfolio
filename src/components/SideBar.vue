@@ -4,8 +4,8 @@
             <Icon
                 icon="entypo:email"
                 :color="color"
-                width="25"
-                height="25"
+                width="20"
+                height="20"
                 :inline="true"
                 class="side-icon"
             />
@@ -14,8 +14,8 @@
             <Icon
                 icon="el:linkedin"
                 :color="color"
-                width="25"
-                height="25"
+                width="20"
+                height="20"
                 :inline="true"
                 class="side-icon"
             />
@@ -24,8 +24,8 @@
             <Icon
                 icon="bi:git"
                 :color="color"
-                width="25"
-                height="25"
+                width="20"
+                height="20"
                 :inline="true"
                 class="side-icon"
             />

@@ -64,6 +64,17 @@ export default {
 </script>
 
 <style>
+.before-enter {
+    opacity: 0;
+    transform: translateY(-60px);
+    transition: all 1s ease;
+}
+
+.enter {
+    opacity: 1;
+    transform: translateY(0);
+}
+
 main {
     margin: 0 auto;
     width: min(100%, 120rem);
