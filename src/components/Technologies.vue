@@ -3,60 +3,60 @@
         <h3>Technologies I have been working with</h3>
 
         <section class="icons">
-            <figure>
+            <figure @mouseenter="hoverOver" @mouseleave="hoverOut">
                 <Icon
                     icon="fontisto:html5"
-                    color="#388186"
+                    :color="color"
                     width="50"
                     height="50"
                     :inline="true"
                 />
                 <figcaption>HTML</figcaption>
             </figure>
-            <figure>
+            <figure @mouseenter="hoverOver" @mouseleave="hoverOut">
                 <Icon
                     icon="fontisto:css3"
-                    color="#388186"
+                    :color="color"
                     width="50"
                     height="50"
                     :inline="true"
                 />
                 <figcaption>CSS</figcaption>
             </figure>
-            <figure>
+            <figure @mouseenter="hoverOver" @mouseleave="hoverOut">
                 <Icon
                     icon="cib:javascript"
-                    color="#388186"
+                    :color="color"
                     width="50"
                     height="50"
                     :inline="true"
                 />
                 <figcaption>JavaScript</figcaption>
             </figure>
-            <figure>
+            <figure @mouseenter="hoverOver" @mouseleave="hoverOut">
                 <Icon
                     icon="akar-icons:node-fill"
-                    color="#388186"
+                    :color="color"
                     width="50"
                     height="50"
                     :inline="true"
                 />
                 <figcaption>Node.JS</figcaption>
             </figure>
-            <figure>
+            <figure @mouseenter="hoverOver" @mouseleave="hoverOut">
                 <Icon
                     icon="uim:vuejs"
-                    color="#388186"
+                    :color="color"
                     width="50"
                     height="50"
                     :inline="true"
                 />
                 <figcaption>Vue</figcaption>
             </figure>
-            <figure>
+            <figure @mouseenter="hoverOver" @mouseleave="hoverOut">
                 <Icon
                     icon="bi:git"
-                    color="#388186"
+                    :color="color"
                     width="50"
                     height="50"
                     :inline="true"
@@ -72,6 +72,23 @@ import { Icon } from "@iconify/vue";
 
 export default {
     components: { Icon },
+    data() {
+        return {
+            color: "#388186",
+        };
+    },
+
+    methods: {
+        hoverOver(e) {
+            const child = e.target.firstElementChild;
+            child.style.color = "#a5e9e1";
+        },
+
+        hoverOut(e) {
+            const child = e.target.firstElementChild;
+            child.style.color = "#388186";
+        },
+    },
 };
 </script>
 
@@ -80,6 +97,7 @@ export default {
     width: min(100%, 90rem);
     margin: 2rem 0;
     position: relative;
+    margin-bottom: 8rem;
 }
 
 .technologies::before {
@@ -119,21 +137,23 @@ export default {
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
+    gap: 3rem;
 }
 
 .icons figure {
-    width: min(110px, 30%);
+    width: 52px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-bottom: 1rem;
-}
-
-.icons figure:hover {
-    filter: brightness(130%);
 }
 
 .icons figure:hover figcaption {
     font-weight: 600;
+}
+
+@media (min-width: 800px) {
+    .technologies {
+        margin: 0 auto 15rem;
+    }
 }
 </style>

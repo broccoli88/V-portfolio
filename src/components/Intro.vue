@@ -17,12 +17,17 @@ export default {};
 
 <style>
 .intro {
-    margin: 2rem 0;
+    height: 80vh;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1rem;
 }
 
 .intro__greeting {
     color: var(--color-accent);
-    font-size: clamp(3rem, 4.5vw, 6rem);
+    font-size: clamp(3rem, 4.5vw, 7rem);
     font-weight: 600;
 
     display: flex;
@@ -35,14 +40,19 @@ export default {};
 }
 
 .intro__description {
-    flex: 1;
     max-width: 80ch;
-    font-size: clamp(2rem, 2.4vw, 2.5rem);
+    font-size: clamp(2rem, 2.4vw, 2.7rem);
+    margin-bottom: 6rem;
 }
 
 @media (min-width: 600px) {
     .intro {
-        margin: 2rem 0;
+        height: 90vh;
+        gap: 2rem;
+    }
+
+    .intro__description {
+        margin-bottom: 0;
     }
 }
 </style>

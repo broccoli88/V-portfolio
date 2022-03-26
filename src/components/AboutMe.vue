@@ -4,11 +4,14 @@
         <section class="about__description">
             <div class="about__text">
                 <transition name="show-text" mode="out-in">
-                    <p v-if="showSnippet">{{ aboutMeSnippet }}</p>
+                    <p v-if="!showSnippet">{{ aboutMeSnippet }}</p>
                     <p v-else>{{ aboutMe }}</p>
                 </transition>
                 <Button class="show-more" @click="toggleAbout">
-                    <span>Show More</span>
+                    <transition name="show-text" mode="out-in">
+                        <span v-if="!showSnippet"> Show More</span>
+                        <span v-else> Show Less</span>
+                    </transition>
                 </Button>
             </div>
             <figure class="about__img">
@@ -16,16 +19,19 @@
             </figure>
         </section>
     </article>
+    <Technologies />
 </template>
 
 <script>
 import Button from "./Button.vue";
 import textAboutMe from "../../Data/about-me";
+import Technologies from "./Technologies.vue";
+
 export default {
-    components: { Button },
+    components: { Button, Technologies },
     data() {
         return {
-            showSnippet: true,
+            showSnippet: false,
             aboutMe: textAboutMe.aboutMe,
         };
     },
@@ -46,9 +52,12 @@ export default {
 
 <style>
 .about {
+    margin-top: 3rem;
     position: relative;
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    gap: 3rem;
 }
 
 .about::before {
@@ -100,8 +109,9 @@ export default {
 
 .about__img {
     flex: 1;
-    max-width: 150px;
+    max-width: 200px;
     height: 100%;
+    align-self: center;
 }
 
 .about__img img {
@@ -125,10 +135,20 @@ export default {
     transition: all 0.3s ease-in;
 }
 
-@media (min-width: 600px) {
+@media (min-width: 800px) {
+    .about {
+        height: 23em;
+    }
+
     .about__description {
+        width: 100%;
+        height: 100%;
         flex-direction: row;
         justify-content: space-between;
+    }
+
+    .about__img {
+        max-width: 250px;
     }
 }
 </style>

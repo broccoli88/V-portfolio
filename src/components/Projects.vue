@@ -138,4 +138,10 @@ export default {
         width: 40%;
     }
 }
+
+@media (min-width: 800px) {
+    .projects {
+        margin-bottom: 10rem;
+    }
+}
 </style>

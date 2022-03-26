@@ -3,6 +3,7 @@
     <header
         @scroll="toggleNavbar"
         :class="{ 'scroll-up': scrolledUp, 'scroll-down': scrolledDown }"
+        class="header"
     >
         <nav class="nav">
             <div class="logo">PJ</div>
@@ -54,9 +55,9 @@
                 </transition-group>
             </transition>
 
-            <section v-if="showNavMobile">
-                <Media class="media-nav" />
-            </section>
+            <transition name="nav-icons" v-if="showNavMobile" appear>
+                <Media />
+            </transition>
         </nav>
     </header>
 </template>
@@ -73,7 +74,7 @@ export default {
             scrolledDown: false,
             scrolledUp: false,
             previousScroll: 0,
-            changeIcon: true,
+            changeIcon: null,
             showNavIcon: null,
             showNavMobile: null,
             showNav: null,
@@ -151,13 +152,6 @@ export default {
 </script>
 
 <style>
-.media-nav {
-    position: absolute;
-    bottom: -80vh;
-    right: 75px;
-    z-index: 11;
-}
-
 .scroll-down {
     transform: translateY(-100%);
 }
@@ -291,6 +285,35 @@ link::before {
     transition: all 0.4s ease;
 }
 
+.nav-icons-leave-from {
+    opacity: 1;
+}
+
+.nav-icons-leave-to {
+    opacity: 0;
+    transform: translateX(300px);
+}
+
+.nav-icons-leave-active {
+    animation: navWait 0.6s ease;
+}
+
+.nav-icons-enter-active {
+    animation: navIconsFade 0.8s ease;
+}
+
+@keyframes navIconsFade {
+    0% {
+        opacity: 0;
+    }
+    60% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
 @media (min-width: 600px) {
     header {
         width: 100%;
@@ -299,7 +322,7 @@ link::before {
         position: fixed;
         z-index: 8888;
 
-        background-color: var(--color-bg);
+        background-color: hsl(0, 0%, 15%, 0.6);
 
         transition: all 0.3s ease-in-out;
     }
