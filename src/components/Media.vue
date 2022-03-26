@@ -1,6 +1,6 @@
 <template>
     <article class="media">
-        <figure>
+        <figure @mouseenter="light" @mouseleave="dark">
             <Icon
                 icon="entypo:email"
                 color="#388186"
@@ -9,7 +9,7 @@
                 :inline="true"
             />
         </figure>
-        <figure>
+        <figure @mouseenter="light" @mouseleave="dark">
             <Icon
                 icon="el:linkedin"
                 color="#388186"
@@ -18,7 +18,7 @@
                 :inline="true"
             />
         </figure>
-        <figure>
+        <figure @mouseenter="light" @mouseleave="dark">
             <Icon
                 icon="bi:git"
                 color="#388186"
@@ -35,11 +35,18 @@ import { Icon } from "@iconify/vue";
 
 export default {
     components: { Icon },
-    data() {
-        return {};
-    },
 
-    methods: {},
+    methods: {
+        light(e) {
+            const child = e.target.firstElementChild;
+            child.style.color = "#a5e9e1";
+        },
+
+        dark(e) {
+            const child = e.target.firstElementChild;
+            child.style.color = "#388186";
+        },
+    },
 };
 </script>
 
@@ -53,14 +60,10 @@ export default {
     position: absolute;
     bottom: -80vh;
     right: 75px;
-    z-index: 11;
+    z-index: 9999;
 }
 
 .media > figure {
     cursor: pointer;
-}
-
-.media > figure:hover {
-    filter: brightness(130%);
 }
 </style>

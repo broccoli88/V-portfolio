@@ -7,8 +7,13 @@
         <Projects />
         <ContactForm />
     </main>
-    <SideBar v-if="showSideBar" />
-    <Mail v-if="showSideBar" />
+    <Footer />
+    <transition name="side-bar-fade" appear>
+        <SideBar v-if="showSideBar" />
+    </transition>
+    <transition name="side-mail-fade" appear>
+        <Mail v-if="showSideBar" />
+    </transition>
 </template>
 
 <script>
@@ -19,6 +24,7 @@ import Projects from "./components/Projects.vue";
 import ContactForm from "./components/ContactForm.vue";
 import SideBar from "./components/SideBar.vue";
 import Mail from "./components/Mail.vue";
+import Footer from "./components/Footer.vue";
 
 export default {
     name: "App",
@@ -30,6 +36,7 @@ export default {
         ContactForm,
         SideBar,
         Mail,
+        Footer,
     },
 
     data() {
@@ -60,10 +67,32 @@ export default {
 main {
     margin: 0 auto;
     width: min(100%, 120rem);
-    padding: 5rem;
+    padding: clamp(5rem, 7vw, 8.5rem);
     display: flex;
     flex-direction: column;
     gap: 6rem;
+}
+
+.side-bar-fade-enter-from,
+.side-bar-fade-leave-to {
+    opacity: 0;
+    transform: translateX(-50px);
+}
+
+.side-bar-fade-enter-active,
+.side-bar-fade-leave-active {
+    transition: all 0.4s ease;
+}
+
+.side-mail-fade-enter-from,
+.side-mail-fade-leave-to {
+    opacity: 0;
+    transform: translateX(50px);
+}
+
+.side-mail-fade-enter-active,
+.side-mail-fade-leave-active {
+    transition: all 0.4s ease;
 }
 
 @media (min-width: 600px) {

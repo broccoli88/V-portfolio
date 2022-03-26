@@ -1,16 +1,5 @@
 <template>
     <article class="side-media">
-        <figure>
-            <Icon
-                icon="charm:triangle"
-                color="purple"
-                width="20"
-                height="20"
-                :rotate="2"
-                :inline="true"
-                class="pointer"
-            />
-        </figure>
         <figure @mouseenter="hoverIn" @mouseleave="hoverOut">
             <Icon
                 icon="entypo:email"
@@ -39,17 +28,6 @@
                 height="25"
                 :inline="true"
                 class="side-icon"
-            />
-        </figure>
-        <figure>
-            <Icon
-                icon="charm:triangle"
-                color="purple"
-                width="20"
-                height="20"
-                :rotate="4"
-                :inline="true"
-                class="pointer"
             />
         </figure>
     </article>
@@ -91,9 +69,43 @@ export default {
     align-items: center;
 
     position: fixed;
-    top: 30%;
-    left: 3%;
+    bottom: 30%;
+    left: clamp(10px, 2vw, 4rem);
     z-index: 11;
+}
+
+.side-media::before {
+    content: "";
+    display: block;
+
+    width: 120%;
+    height: 10%;
+
+    border-top: 2px solid var(--color-secondary);
+    border-right: 2px solid var(--color-secondary);
+    border-left: 2px solid var(--color-secondary);
+
+    position: absolute;
+    top: -5rem;
+    left: -2.5px;
+    z-index: 10;
+}
+
+.side-media::after {
+    content: "";
+    display: block;
+
+    width: 120%;
+    height: 10%;
+
+    border-bottom: 2px solid var(--color-secondary);
+    border-right: 2px solid var(--color-secondary);
+    border-left: 2px solid var(--color-secondary);
+
+    position: absolute;
+    bottom: -5rem;
+    left: -2.5px;
+    z-index: 10;
 }
 
 .side-icon {
@@ -102,5 +114,11 @@ export default {
 
 .pointer {
     margin: 2rem 0;
+}
+
+@media (min-width: 1300px) {
+    .side-media {
+        left: 5%;
+    }
 }
 </style>

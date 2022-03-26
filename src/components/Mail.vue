@@ -1,37 +1,11 @@
 <template>
     <article class="side-mail">
-        <figure>
-            <Icon
-                icon="charm:triangle"
-                color="purple"
-                width="20"
-                height="20"
-                :rotate="2"
-                :inline="true"
-                class="pointer"
-            />
-        </figure>
         <p class="mail">pawel.jaromin@protonmail.com</p>
-        <figure>
-            <Icon
-                icon="charm:triangle"
-                color="purple"
-                width="20"
-                height="20"
-                :rotate="4"
-                :inline="true"
-                class="pointer"
-            />
-        </figure>
     </article>
 </template>
 
 <script>
-import { Icon } from "@iconify/vue";
-
-export default {
-    components: { Icon },
-};
+export default {};
 </script>
 
 <style>
@@ -45,22 +19,63 @@ export default {
     justify-content: center;
 
     position: fixed;
-    top: 30%;
-    right: 3%;
+    bottom: 30%;
+    right: clamp(10px, 2vw, 4rem);
     z-index: 11;
-
     cursor: pointer;
 }
 
+.side-mail::before {
+    content: "";
+    display: block;
+
+    width: 120%;
+    height: 6%;
+
+    border-top: 2px solid var(--color-secondary);
+    border-right: 2px solid var(--color-secondary);
+    border-left: 2px solid var(--color-secondary);
+
+    position: absolute;
+    top: -5rem;
+    right: 1px;
+    z-index: 10;
+}
+
+.side-mail::after {
+    content: "";
+    display: block;
+
+    width: 120%;
+    height: 6%;
+
+    border-bottom: 2px solid var(--color-secondary);
+    border-right: 2px solid var(--color-secondary);
+    border-left: 2px solid var(--color-secondary);
+
+    position: absolute;
+    bottom: -5rem;
+    right: -1px;
+    z-index: 10;
+}
+
 .mail {
-    height: 32rem;
+    font-size: 2.5rem;
+    height: 30rem;
     writing-mode: vertical-lr;
     letter-spacing: 1.5px;
+    line-height: 1;
     font-weight: 500;
 }
 
 .mail:hover {
     filter: brightness(130%);
     font-weight: 600;
+}
+
+@media (min-width: 1300px) {
+    .side-mail {
+        right: 5%;
+    }
 }
 </style>

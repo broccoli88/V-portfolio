@@ -52,11 +52,10 @@
                     >
                         <a class="link__mobile" href="#">{{ link }}</a>
                     </li>
+                    <transition name="nav-icons" v-if="showNavMobile" appear>
+                        <Media />
+                    </transition>
                 </transition-group>
-            </transition>
-
-            <transition name="nav-icons" v-if="showNavMobile" appear>
-                <Media />
             </transition>
         </nav>
     </header>

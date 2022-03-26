@@ -53,6 +53,7 @@
                     cols="30"
                     rows="10"
                     placeholder="Message"
+                    required
                 ></textarea>
             </section>
             <Button class="send">
@@ -88,8 +89,6 @@ export default {
 }
 
 .outline {
-    animation: inputBorderToggle 1s ease;
-
     background-image: linear-gradient(
         to right,
         var(--color-primary),
@@ -99,6 +98,8 @@ export default {
     background-position: 0 100%;
     background-size: 100% 2px;
     background-repeat: no-repeat;
+
+    animation: inputBorderToggle 1s ease;
 }
 
 @keyframes inputBorderToggle {
