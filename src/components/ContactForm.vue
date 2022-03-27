@@ -1,10 +1,11 @@
 <template>
     <article class="contact">
-        <h2>Contact me</h2>
+        <h2 v-scrollAnimation>Contact me</h2>
         <form class="contact__form">
             <section class="input-container area-name">
                 <label for="name" class="contact__label"></label>
                 <input
+                    v-scrollAnimation
                     @blur="loseOutline"
                     @focus="outline"
                     class="contact__input"
@@ -19,6 +20,7 @@
             <section class="input-container area-last-name">
                 <label for="last-name"></label>
                 <input
+                    v-scrollAnimation
                     @blur="loseOutline"
                     @focus="outline"
                     class="contact__input"
@@ -32,6 +34,7 @@
             <section class="input-container area-email">
                 <label for="email"></label>
                 <input
+                    v-scrollAnimation
                     @blur="loseOutline"
                     @focus="outline"
                     class="contact__input"
@@ -45,6 +48,7 @@
             <section class="input-container area-message">
                 <label for="message"></label>
                 <textarea
+                    v-scrollAnimation
                     @blur="loseOutline"
                     @focus="outline"
                     class="contact__input"
@@ -65,7 +69,31 @@
 
 <script>
 import Button from "./Button.vue";
+
+const scrollAnimation = {
+    mounted: (el) => {
+        let option = {
+            root: null,
+            rootMargin: "-150px",
+            threshold: 0,
+        };
+
+        const animationObserver = new IntersectionObserver(
+            (entries, animationObserver) => {
+                entries.forEach((entry) => {
+                    if (!entry.isIntersecting) return;
+                    el.classList.toggle("on-entry");
+                    animationObserver.unobserve(el);
+                    console.log(entry.target, el);
+                });
+            }
+        );
+        animationObserver.observe(el);
+    },
+};
+
 export default {
+    directives: { scrollAnimation },
     components: { Button },
     methods: {
         outline(e) {

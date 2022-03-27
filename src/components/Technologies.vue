@@ -1,8 +1,8 @@
 <template>
     <article class="technologies">
-        <h3>Technologies I have been working with</h3>
+        <h3 v-scrollAnimation>Technologies I have been working with</h3>
 
-        <section class="icons">
+        <section v-scrollAnimation class="icons">
             <figure @mouseenter="hoverOver" @mouseleave="hoverOut">
                 <Icon
                     icon="fontisto:html5"
@@ -70,7 +70,30 @@
 <script>
 import { Icon } from "@iconify/vue";
 
+const scrollAnimation = {
+    mounted: (el) => {
+        let option = {
+            root: null,
+            rootMargin: "-150px",
+            threshold: 0,
+        };
+
+        const animationObserver = new IntersectionObserver(
+            (entries, animationObserver) => {
+                entries.forEach((entry) => {
+                    if (!entry.isIntersecting) return;
+                    el.classList.toggle("on-entry");
+                    animationObserver.unobserve(el);
+                    console.log(entry.target, el);
+                });
+            }
+        );
+        animationObserver.observe(el);
+    },
+};
+
 export default {
+    directives: { scrollAnimation },
     components: { Icon },
     data() {
         return {

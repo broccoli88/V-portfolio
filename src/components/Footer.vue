@@ -1,6 +1,6 @@
 <template>
     <footer>
-        <section class="footer-media">
+        <section v-scrollAnimation class="footer-media">
             <figure @mouseenter="hover" @mouseleave="withoutHover">
                 <Icon
                     icon="entypo:email"
@@ -29,14 +29,37 @@
                 />
             </figure>
         </section>
-        <p>Made by Pawel Jaromin</p>
+        <p v-scrollAnimation>Made by Pawel Jaromin</p>
     </footer>
 </template>
 
 <script>
 import { Icon } from "@iconify/vue";
 
+const scrollAnimation = {
+    mounted: (el) => {
+        let option = {
+            root: null,
+            rootMargin: "-150px",
+            threshold: 0,
+        };
+
+        const animationObserver = new IntersectionObserver(
+            (entries, animationObserver) => {
+                entries.forEach((entry) => {
+                    if (!entry.isIntersecting) return;
+                    el.classList.toggle("on-entry");
+                    animationObserver.unobserve(el);
+                    console.log(entry.target, el);
+                });
+            }
+        );
+        animationObserver.observe(el);
+    },
+};
+
 export default {
+    directives: { scrollAnimation },
     components: { Icon },
 
     methods: {

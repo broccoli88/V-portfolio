@@ -1,10 +1,12 @@
 <template>
-    <article class="about">
-        <h2>About Me</h2>
-        <section class="about__description">
-            <div class="about__text">
+    <article v-scrollAnimation class="about">
+        <h2 v-scrollAnimation>About Me</h2>
+        <section v-scrollAnimation class="about__description">
+            <div v-scrollAnimation class="about__text">
                 <transition name="show-text" mode="out-in">
-                    <p v-if="!showSnippet">{{ aboutMeSnippet }}</p>
+                    <p v-scrollAnimation v-if="!showSnippet">
+                        {{ aboutMeSnippet }}
+                    </p>
                     <p v-else>{{ aboutMe }}</p>
                 </transition>
                 <Button class="show-more" @click="toggleAbout">
@@ -14,7 +16,7 @@
                     </transition>
                 </Button>
             </div>
-            <figure class="about__img">
+            <figure v-scrollAnimation class="about__img">
                 <img src="../assets/Pawel_Jaromin.jpeg" alt="" />
             </figure>
         </section>
@@ -27,7 +29,30 @@ import Button from "./Button.vue";
 import textAboutMe from "../../Data/about-me";
 import Technologies from "./Technologies.vue";
 
+const scrollAnimation = {
+    mounted: (el) => {
+        let option = {
+            root: null,
+            rootMargin: "-150px",
+            threshold: 0,
+        };
+
+        const animationObserver = new IntersectionObserver(
+            (entries, animationObserver) => {
+                entries.forEach((entry) => {
+                    if (!entry.isIntersecting) return;
+                    el.classList.toggle("on-entry");
+                    animationObserver.unobserve(el);
+                    console.log(entry.target, el);
+                });
+            }
+        );
+        animationObserver.observe(el);
+    },
+};
+
 export default {
+    directives: { scrollAnimation },
     components: { Button, Technologies },
     data() {
         return {
@@ -133,6 +158,23 @@ export default {
 .show-text-enter-active,
 .show-text-leave-active {
     transition: all 0.3s ease-in;
+}
+
+.on-entry {
+    animation: onEntryAnimation 1s ease;
+    animation-iteration-count: 1;
+}
+
+@keyframes onEntryAnimation {
+    0% {
+        opacity: 0;
+        transform: translateY(60px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 @media (min-width: 800px) {
