@@ -5,8 +5,9 @@
         :class="{ 'scroll-up': scrolledUp, 'scroll-down': scrolledDown }"
         class="header"
     >
+        <NavLogo class="nav__logo" />
+        <Logo />
         <nav class="nav">
-            <div class="logo">PJ</div>
             <transition name="wide-nav-fade" mode="out-in" appear>
                 <ul class="nav__links" v-show="!showNavIcon">
                     <li>
@@ -52,6 +53,7 @@
                 />
             </transition>
             <div class="list-container">
+                <NavLogo class="mobile__logo" />
                 <transition name="nav-slide">
                     <ul appear v-if="showNavMobile" class="nav__mobile">
                         <li>
@@ -83,9 +85,11 @@
 
 <script>
 import Media from "./Media.vue";
+import NavLogo from "./NavLogo.vue";
+import Logo from "./Logo.vue";
 import { Icon } from "@iconify/vue";
 export default {
-    components: { Icon, Media },
+    components: { Icon, Media, NavLogo, Logo },
 
     data() {
         return {
@@ -187,8 +191,30 @@ export default {
 
     display: flex;
     justify-content: space-between;
+}
 
-    /* position: relative; */
+.nav__logo {
+    display: none;
+}
+
+@media (min-width: 600px) and (max-width: 1365px) {
+    .nav__logo {
+        width: fit-content;
+        height: 100%;
+
+        display: flex;
+        align-items: center;
+        position: absolute;
+        top: 0;
+        left: clamp(10px, 2vw, 4rem);
+
+        z-index: 9999;
+    }
+
+    .nav__logo > img {
+        width: 100%;
+        height: 80%;
+    }
 }
 
 .nav__links {
@@ -205,6 +231,20 @@ export default {
 
 .list-container {
     position: relative;
+}
+
+.mobile__logo {
+    display: none;
+}
+
+@media (max-width: 600px) {
+    .mobile__logo {
+        position: fixed;
+        top: 0;
+        right: 0;
+
+        z-index: 9999;
+    }
 }
 
 .nav__icons {

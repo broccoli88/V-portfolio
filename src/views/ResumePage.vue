@@ -4,14 +4,13 @@
         <h2>Pawel Jaromin</h2>
         <div class="buttons">
             <Button @click="ETGoHome">Back to Home</Button>
-            <Button>
-                <a
-                    class="download"
-                    href="../assets/resume-example.jpg"
-                    download="Resume_Pawel_Jaromin"
-                    >Download Resume</a
-                >
-            </Button>
+            <a
+                class="download"
+                href="../../public/files/resume-example.jpg"
+                download
+            >
+                <Button> Download Resume </Button>
+            </a>
         </div>
         <figure class="resume-scan">
             <img src="../assets/resume-example.jpg" alt="" />
@@ -35,7 +34,8 @@ export default {
 
 <style>
 .resume-page {
-    width: 100vw;
+    margin: 0 auto;
+    width: min(100%, 120rem);
     height: 100vh;
     padding: clamp(5rem, 7vw, 8.5rem);
 
@@ -46,6 +46,7 @@ export default {
 
 .resume-page > h2 {
     color: var(--color-secondary);
+    margin-bottom: 4rem;
 }
 .resume-scan {
     margin-top: 5rem;
