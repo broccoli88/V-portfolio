@@ -50,7 +50,6 @@ const scrollAnimation = {
                     if (!entry.isIntersecting) return;
                     el.classList.toggle("on-entry");
                     animationObserver.unobserve(el);
-                    console.log(entry.target, el);
                 });
             }
         );

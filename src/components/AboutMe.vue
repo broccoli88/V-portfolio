@@ -43,7 +43,6 @@ const scrollAnimation = {
                     if (!entry.isIntersecting) return;
                     el.classList.toggle("on-entry");
                     animationObserver.unobserve(el);
-                    console.log(entry.target, el);
                 });
             }
         );
@@ -153,6 +152,7 @@ export default {
 .show-text-enter-from,
 .show-text-leave-to {
     opacity: 0;
+    transform: translateY(60px);
 }
 
 .show-text-enter-active,
