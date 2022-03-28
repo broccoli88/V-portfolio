@@ -13,13 +13,13 @@
             <transition name="wide-nav-fade" mode="out-in" appear>
                 <ul class="nav__links" v-show="!showNavIcon">
                     <li>
-                        <a class="link" href="#">About Me</a>
+                        <a class="link" href="#about-me">About Me</a>
                     </li>
                     <li>
-                        <a class="link" href="#">Projects</a>
+                        <a class="link" href="#projects">Projects</a>
                     </li>
                     <li>
-                        <a class="link" href="#">Contact</a>
+                        <a class="link" href="#contact">Contact</a>
                     </li>
                     <li>
                         <router-link

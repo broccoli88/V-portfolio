@@ -1,5 +1,5 @@
 <template>
-    <article class="projects">
+    <article class="projects" id="projects">
         <h2 v-scrollAnimation>Projects</h2>
         <section>
             <ul class="project__list">

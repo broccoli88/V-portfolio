@@ -1,5 +1,5 @@
 <template>
-    <article class="intro">
+    <article class="intro" id="intro">
         <p class="intro__greeting">Hi! I'm</p>
         <h1>Pawel Jaromin</h1>
         <h2>and coding became my passion</h2>

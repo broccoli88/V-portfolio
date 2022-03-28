@@ -1,5 +1,5 @@
 <template>
-    <article v-scrollAnimation class="about">
+    <article v-scrollAnimation class="about" id="about-me">
         <h2 v-scrollAnimation>About Me</h2>
         <section v-scrollAnimation class="about__description">
             <div v-scrollAnimation class="about__text">

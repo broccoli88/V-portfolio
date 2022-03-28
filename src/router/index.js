@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from "vue-router";
 import Home from "../views/Home.vue";
 import Resume from "../views/ResumePage.vue";
 import PageNotFound from "../views/PageNotFound.vue";
+import AfterSubmission from "../views/AfterSubmission.vue";
 
 const routes = [
   {
@@ -14,6 +15,12 @@ const routes = [
     path: "/resume",
     name: "resume",
     component: Resume,
+  },
+
+  {
+    path: "/consider-contacted",
+    name: "form-submitted",
+    component: AfterSubmission,
   },
 
   {

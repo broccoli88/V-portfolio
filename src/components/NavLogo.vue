@@ -1,6 +1,6 @@
 <template>
     <figure class="logo-small">
-        <a href="#"> <img src="../assets/Logo1.svg" alt="" /></a>
+        <a href="#intro"> <img src="../assets/Logo1.svg" alt="" /></a>
     </figure>
 </template>
 
