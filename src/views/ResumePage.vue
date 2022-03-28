@@ -3,26 +3,29 @@
         <h1>Resume</h1>
         <h2>Pawel Jaromin</h2>
         <div class="buttons">
-            <Button @click="ETGoHome">Back to Home</Button>
+            <Button @click="ETGoHome">Home</Button>
             <a
                 class="download"
                 href="../../public/files/resume-example.jpg"
                 download
             >
-                <Button> Download Resume </Button>
+                <Button>Download</Button>
             </a>
         </div>
         <figure class="resume-scan">
             <img src="../assets/resume-example.jpg" alt="" />
         </figure>
     </article>
+
+    <Footer />
 </template>
 
 <script>
 import Button from "../components/Button.vue";
+import Footer from "../components/Footer.vue";
 
 export default {
-    components: { Button },
+    components: { Button, Footer },
 
     methods: {
         ETGoHome() {
@@ -35,8 +38,8 @@ export default {
 <style>
 .resume-page {
     margin: 0 auto;
-    width: min(100%, 120rem);
-    height: 100vh;
+    max-width: min(100%, 120rem);
+    min-height: 100vh;
     padding: clamp(5rem, 7vw, 8.5rem);
 
     display: flex;
@@ -51,6 +54,7 @@ export default {
 .resume-scan {
     margin-top: 5rem;
     width: 100%;
+    height: 100%;
 }
 
 .resume-scan > img {

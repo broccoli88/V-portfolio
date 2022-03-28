@@ -20,7 +20,7 @@ export default {};
         top: 12rem;
         left: clamp(10px, 2vw, 4rem);
 
-        width: 120px;
+        width: 80px;
         aspect-ratio: 1;
     }
 

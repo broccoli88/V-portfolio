@@ -18,7 +18,7 @@ export default {};
     align-items: center;
 
     position: fixed;
-    bottom: 30%;
+    bottom: 20%;
     right: clamp(12px, 2vw, 4rem);
     z-index: 11;
     cursor: pointer;

@@ -5,8 +5,10 @@
         :class="{ 'scroll-up': scrolledUp, 'scroll-down': scrolledDown }"
         class="header"
     >
-        <NavLogo class="nav__logo" />
-        <Logo />
+        <transition name="wide-nav-fade" mode="out-in" appear>
+            <NavLogo class="nav__logo" />
+        </transition>
+        <!-- <Logo /> -->
         <nav class="nav">
             <transition name="wide-nav-fade" mode="out-in" appear>
                 <ul class="nav__links" v-show="!showNavIcon">
@@ -52,8 +54,10 @@
                     :inline="true"
                 />
             </transition>
-            <div class="list-container">
-                <NavLogo class="mobile__logo" />
+            <div>
+                <transition name="nav-icons">
+                    <NavLogo class="mobile__logo" v-if="showNavMobile" />
+                </transition>
                 <transition name="nav-slide">
                     <ul appear v-if="showNavMobile" class="nav__mobile">
                         <li>
@@ -75,7 +79,7 @@
                     </ul>
                 </transition>
 
-                <transition name="nav-icons" v-if="showNavMobile" appear>
+                <transition name="nav-icons" appear v-if="showNavMobile">
                     <Media class="nav__icons" />
                 </transition>
             </div>
@@ -112,6 +116,7 @@ export default {
 
     mounted() {
         window.addEventListener("scroll", this.toggleNavbar);
+        this.toggleNavbar();
     },
 
     updated() {
@@ -197,23 +202,19 @@ export default {
     display: none;
 }
 
-@media (min-width: 600px) and (max-width: 1365px) {
-    .nav__logo {
-        width: fit-content;
-        height: 100%;
+header {
+    display: flex;
+    align-items: center;
+    padding: 0 clamp(10px, 2vw, 4rem);
+    /* justify-content: space-between; */
+}
 
+@media (min-width: 600px) {
+    .nav__logo {
+        width: 40px;
+        margin-left: 2em;
         display: flex;
         align-items: center;
-        position: absolute;
-        top: 0;
-        left: clamp(10px, 2vw, 4rem);
-
-        z-index: 9999;
-    }
-
-    .nav__logo > img {
-        width: 100%;
-        height: 80%;
     }
 }
 
@@ -229,27 +230,9 @@ export default {
     gap: clamp(4rem, 8%, 6rem);
 }
 
-.list-container {
-    position: relative;
-}
-
-.mobile__logo {
-    display: none;
-}
-
-@media (max-width: 600px) {
-    .mobile__logo {
-        position: fixed;
-        top: 0;
-        right: 0;
-
-        z-index: 9999;
-    }
-}
-
 .nav__icons {
     position: fixed;
-    top: 80vh;
+    bottom: 10vh;
     right: 75px;
     z-index: 9999;
 }
@@ -334,6 +317,19 @@ export default {
     top: 0;
     right: 0;
     z-index: 10;
+}
+
+@media (max-width: 600px) {
+    .mobile__logo {
+        width: 40px;
+        aspect-ratio: 1;
+
+        position: fixed;
+        top: 2.4rem;
+        right: 220px;
+
+        z-index: 9999;
+    }
 }
 
 .burger,
@@ -428,7 +424,7 @@ export default {
 
 .nav-icons-leave-to {
     opacity: 0;
-    transform: translateX(300px);
+    transform: translateX(100px);
 }
 
 .nav-icons-leave-active {
