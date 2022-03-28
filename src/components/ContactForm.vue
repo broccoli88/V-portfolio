@@ -1,50 +1,57 @@
 <template>
-    <article class="contact">
-        <h2>Contact me</h2>
-        <form class="contact__form">
+    <article class="contact" id="contact">
+        <h2 v-scrollAnimation>Contact me</h2>
+        <form class="contact__form" @submit.prevent="handleSubmit">
             <section class="input-container area-name">
-                <label for="name" class="contact__label"></label>
                 <input
+                    v-model="firstName"
+                    v-scrollAnimation
                     @blur="loseOutline"
                     @focus="outline"
                     class="contact__input"
                     type="text"
                     id="name"
                     name="contact"
-                    required
                     placeholder="Name"
                 />
+                <span class="error" v-if="v$.firstName.$error">
+                    {{ v$.firstName.$errors[0].$message }}
+                </span>
             </section>
 
             <section class="input-container area-last-name">
-                <label for="last-name"></label>
                 <input
+                    v-model="lastName"
+                    v-scrollAnimation
                     @blur="loseOutline"
                     @focus="outline"
                     class="contact__input"
                     type="text"
                     id="last-name"
                     name="contact"
-                    required
                     placeholder="Last name"
                 />
             </section>
             <section class="input-container area-email">
-                <label for="email"></label>
                 <input
+                    v-model="email"
+                    v-scrollAnimation
                     @blur="loseOutline"
                     @focus="outline"
                     class="contact__input"
-                    type="email"
+                    type="text"
                     id="email"
                     name="contact"
-                    required
                     placeholder="Email"
                 />
+                <span class="error" v-if="v$.email.$error">
+                    {{ v$.email.$errors[0].$message }}
+                </span>
             </section>
             <section class="input-container area-message">
-                <label for="message"></label>
                 <textarea
+                    v-model="message"
+                    v-scrollAnimation
                     @blur="loseOutline"
                     @focus="outline"
                     class="contact__input"
@@ -53,8 +60,10 @@
                     cols="30"
                     rows="10"
                     placeholder="Message"
-                    required
                 ></textarea>
+                <span class="error" v-if="v$.message.$error">
+                    {{ v$.message.$errors[0].$message }}
+                </span>
             </section>
             <Button class="send">
                 <span>Send</span>
@@ -65,9 +74,68 @@
 
 <script>
 import Button from "./Button.vue";
+import useVuelidate from "@vuelidate/core";
+import { required, email, minLength, maxLength } from "@vuelidate/validators";
+
+const scrollAnimation = {
+    mounted: (el) => {
+        let option = {
+            root: null,
+            rootMargin: "-150px",
+            threshold: 0,
+        };
+
+        const animationObserver = new IntersectionObserver(
+            (entries, animationObserver) => {
+                entries.forEach((entry) => {
+                    if (!entry.isIntersecting) return;
+                    el.classList.toggle("on-entry");
+                    animationObserver.unobserve(el);
+                });
+            }
+        );
+        animationObserver.observe(el);
+    },
+};
+
 export default {
+    directives: { scrollAnimation },
     components: { Button },
+
+    data() {
+        return {
+            v$: useVuelidate(),
+            firstName: "",
+            lastName: "",
+            email: "",
+            message: "",
+            errorName: false,
+            errorEmail: false,
+            errorMessage: false,
+        };
+    },
+
+    validations() {
+        return {
+            firstName: {
+                required,
+                minLength: minLength(3),
+                maxLength: maxLength(30),
+            },
+            email: { required, email },
+            message: {
+                required,
+                minLength: minLength(2),
+                maxLength: maxLength(30),
+            },
+        };
+    },
+
     methods: {
+        handleSubmit() {
+            this.v$.$validate();
+        },
+
         outline(e) {
             const parent = e.target.parentElement;
             parent.classList.add("outline");
@@ -86,6 +154,19 @@ export default {
     padding: 2px 0;
     display: flex;
     flex-direction: column;
+
+    position: relative;
+}
+
+.error {
+    color: var(--color-accent);
+    font-size: 1.8rem;
+    line-height: 1;
+    font-weight: 500;
+
+    position: absolute;
+    bottom: -1.8rem;
+    left: 0;
 }
 
 .outline {

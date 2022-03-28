@@ -10,16 +10,15 @@ export default {};
 
 <style>
 .side-mail {
-    width: fit-content;
+    width: 2rem;
 
     display: flex;
     flex-direction: column;
     gap: 3rem;
     align-items: center;
-    justify-content: center;
 
     position: fixed;
-    bottom: 30%;
+    bottom: 20%;
     right: clamp(12px, 2vw, 4rem);
     z-index: 11;
     cursor: pointer;
@@ -38,7 +37,7 @@ export default {};
 
     position: absolute;
     top: -5rem;
-    right: -1px;
+    right: 0px;
     z-index: 10;
 }
 
@@ -55,7 +54,7 @@ export default {};
 
     position: absolute;
     bottom: -5rem;
-    right: -1px;
+    right: 0px;
     z-index: 10;
 }
 

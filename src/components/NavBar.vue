@@ -5,12 +5,28 @@
         :class="{ 'scroll-up': scrolledUp, 'scroll-down': scrolledDown }"
         class="header"
     >
+        <transition name="wide-nav-fade" mode="out-in" appear>
+            <NavLogo class="nav__logo" />
+        </transition>
+        <!-- <Logo /> -->
         <nav class="nav">
-            <div class="logo">PJ</div>
-            <transition name="wide-nav-fade" mode="out-in">
+            <transition name="wide-nav-fade" mode="out-in" appear>
                 <ul class="nav__links" v-show="!showNavIcon">
-                    <li v-for="(link, index) in links" :key="index">
-                        <a class="link" href="#">{{ link }}</a>
+                    <li>
+                        <a class="link" href="#about-me">About Me</a>
+                    </li>
+                    <li>
+                        <a class="link" href="#projects">Projects</a>
+                    </li>
+                    <li>
+                        <a class="link" href="#contact">Contact</a>
+                    </li>
+                    <li>
+                        <router-link
+                            :to="{ name: 'resume' }"
+                            class="link resume"
+                            >Resume</router-link
+                        >
                     </li>
                 </ul>
             </transition>
@@ -38,27 +54,32 @@
                     :inline="true"
                 />
             </transition>
-            <div class="list-container">
+            <div>
+                <transition name="nav-icons">
+                    <NavLogo class="mobile__logo" v-if="showNavMobile" />
+                </transition>
                 <transition name="nav-slide">
-                    <transition-group
-                        tag="ul"
-                        appear
-                        v-if="showNavMobile"
-                        class="nav__mobile"
-                        @before-enter="beforeEnter"
-                        @enter="enter"
-                    >
-                        <li
-                            v-for="(link, index) in links"
-                            :key="link"
-                            :data-index="index"
-                        >
-                            <a class="link__mobile" href="#">{{ link }}</a>
+                    <ul appear v-if="showNavMobile" class="nav__mobile">
+                        <li>
+                            <a class="link__mobile" href="#">About Me</a>
                         </li>
-                    </transition-group>
+                        <li>
+                            <a class="link__mobile" href="#">Projects</a>
+                        </li>
+                        <li>
+                            <a class="link__mobile" href="#">Contact</a>
+                        </li>
+                        <li>
+                            <router-link
+                                :to="{ name: 'resume' }"
+                                class="link__mobile resume"
+                                >Resume</router-link
+                            >
+                        </li>
+                    </ul>
                 </transition>
 
-                <transition name="nav-icons" v-if="showNavMobile" appear>
+                <transition name="nav-icons" appear v-if="showNavMobile">
                     <Media class="nav__icons" />
                 </transition>
             </div>
@@ -68,10 +89,11 @@
 
 <script>
 import Media from "./Media.vue";
-import gsap from "gsap";
+import NavLogo from "./NavLogo.vue";
+import Logo from "./Logo.vue";
 import { Icon } from "@iconify/vue";
 export default {
-    components: { Icon, Media },
+    components: { Icon, Media, NavLogo, Logo },
 
     data() {
         return {
@@ -94,6 +116,11 @@ export default {
 
     mounted() {
         window.addEventListener("scroll", this.toggleNavbar);
+        this.toggleNavbar();
+    },
+
+    updated() {
+        this.linksEntry();
     },
 
     methods: {
@@ -115,17 +142,16 @@ export default {
             }
         },
 
-        beforeEnter(el) {
-            el.style.opacity = 0;
-            el.style.transform = "translateX(80px)";
-        },
-
-        enter(el, done) {
-            gsap.to(el, {
-                opacity: 1,
-                x: 0,
-                delay: 0.4 + el.dataset.index * 0.1,
-                onComplete: done,
+        linksEntry() {
+            const links = document.querySelectorAll(".link__mobile");
+            links.forEach((link, index) => {
+                if (link.style.animation.includes("linksFadeIn")) {
+                    link.style.animation = "linksFadeOut 0.4s ease";
+                } else {
+                    link.style.animation = `linksFadeIn 0.4s ease forwards ${
+                        index / 7 + 0.5
+                    }s`;
+                }
             });
         },
 
@@ -170,8 +196,26 @@ export default {
 
     display: flex;
     justify-content: space-between;
+}
 
-    /* position: relative; */
+.nav__logo {
+    display: none;
+}
+
+header {
+    display: flex;
+    align-items: center;
+    padding: 0 clamp(10px, 2vw, 4rem);
+    /* justify-content: space-between; */
+}
+
+@media (min-width: 600px) {
+    .nav__logo {
+        width: 40px;
+        margin-left: 2em;
+        display: flex;
+        align-items: center;
+    }
 }
 
 .nav__links {
@@ -186,13 +230,9 @@ export default {
     gap: clamp(4rem, 8%, 6rem);
 }
 
-.list-container {
-    position: relative;
-}
-
 .nav__icons {
     position: fixed;
-    top: 80vh;
+    bottom: 10vh;
     right: 75px;
     z-index: 9999;
 }
@@ -205,11 +245,48 @@ export default {
     outline: none;
 }
 
-link::before {
+.resume {
+    position: relative;
+}
+
+.resume::before {
     content: "";
     display: inline-block;
-    width: 1%;
-    height: 1%;
+    width: 30%;
+    height: 40%;
+
+    border-top: 1px solid var(--color-primary);
+    border-left: 1px solid var(--color-primary);
+
+    position: absolute;
+    top: -3px;
+    left: -5px;
+
+    transition: all 0.5s ease;
+}
+
+.resume::after {
+    content: "";
+    display: inline-block;
+    width: 30%;
+    height: 40%;
+
+    border-bottom: 1px solid var(--color-primary);
+    border-right: 1px solid var(--color-primary);
+
+    position: absolute;
+    bottom: -3px;
+    right: -5px;
+
+    transition: all 0.5s ease;
+}
+
+.resume:hover::after,
+.resume:hover::before,
+.resume:focus::after,
+.resume:focus::before {
+    width: 90%;
+    height: 90%;
 }
 
 .link:hover,
@@ -240,6 +317,19 @@ link::before {
     top: 0;
     right: 0;
     z-index: 10;
+}
+
+@media (max-width: 600px) {
+    .mobile__logo {
+        width: 40px;
+        aspect-ratio: 1;
+
+        position: fixed;
+        top: 2.4rem;
+        right: 220px;
+
+        z-index: 9999;
+    }
 }
 
 .burger,
@@ -285,6 +375,34 @@ link::before {
     }
 }
 
+.link__mobile {
+    opacity: 0;
+}
+
+@keyframes linksFadeIn {
+    from {
+        opacity: 0;
+        /* transform: translateX(200px); */
+    }
+
+    to {
+        opacity: 1;
+        /* transform: translateX(0); */
+    }
+}
+
+@keyframes linksFadeOut {
+    from {
+        opacity: 1;
+        /* transform: translateX(0px); */
+    }
+
+    to {
+        opacity: 0;
+        /* transform: translateX(200px); */
+    }
+}
+
 .switch-enter-from,
 .switch-leave-to {
     opacity: 0;
@@ -306,7 +424,7 @@ link::before {
 
 .nav-icons-leave-to {
     opacity: 0;
-    transform: translateX(300px);
+    transform: translateX(100px);
 }
 
 .nav-icons-leave-active {
