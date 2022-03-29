@@ -1,34 +1,11 @@
 <template>
-    <button v-scrollAnimation class="button">
+    <button class="button">
         <slot></slot>
     </button>
 </template>
 
 <script>
-const scrollAnimation = {
-    mounted: (el) => {
-        let option = {
-            root: null,
-            rootMargin: "-150px",
-            threshold: 0,
-        };
-
-        const animationObserver = new IntersectionObserver(
-            (entries, animationObserver) => {
-                entries.forEach((entry) => {
-                    if (!entry.isIntersecting) return;
-                    el.classList.toggle("on-entry");
-                    animationObserver.unobserve(el);
-                });
-            }
-        );
-        animationObserver.observe(el);
-    },
-};
-
-export default {
-    directives: { scrollAnimation },
-};
+export default {};
 </script>
 
 <style>

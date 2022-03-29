@@ -1,11 +1,28 @@
 <template>
     <article class="side-mail">
-        <p class="mail">pawel.jaromin@protonmail.com</p>
+        <transition name="side-buttons-fade" appear>
+            <SideButtons v-if="showSideButtons" />
+        </transition>
+        <p @click="displayOptions" class="mail">pawel.jaromin@protonmail.com</p>
     </article>
 </template>
 
 <script>
-export default {};
+import SideButtons from "../components/SideButtons.vue";
+export default {
+    components: { SideButtons },
+    data() {
+        return {
+            showSideButtons: false,
+        };
+    },
+
+    methods: {
+        displayOptions() {
+            this.showSideButtons = !this.showSideButtons;
+        },
+    },
+};
 </script>
 
 <style>
@@ -76,5 +93,16 @@ export default {};
     .side-mail {
         right: 5%;
     }
+}
+
+.side-buttons-fade-enter-from,
+.side-buttons-fade-leave-to {
+    opacity: 0;
+    transform: translateY(-40px);
+}
+
+.side-buttons-fade-enter-active,
+.side-buttons-fade-leave-active {
+    transition: all 0.4s ease;
 }
 </style>

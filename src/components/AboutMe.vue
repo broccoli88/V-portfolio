@@ -9,7 +9,11 @@
                     </p>
                     <p v-else>{{ aboutMe }}</p>
                 </transition>
-                <Button class="show-more" @click="toggleAbout">
+                <Button
+                    v-scrollAnimation
+                    class="show-more"
+                    @click="toggleAbout"
+                >
                     <transition name="show-text" mode="out-in">
                         <span v-if="!showSnippet"> Show More</span>
                         <span v-else> Show Less</span>

@@ -18,16 +18,16 @@
                         >{{ project.technologies }}
                     </p>
                     <div class="buttons">
-                        <Button>
+                        <Button v-scrollAnimation>
                             <span>Live App</span>
                         </Button>
-                        <Button>
+                        <Button v-scrollAnimation>
                             <span>Git</span>
                         </Button>
                     </div>
                 </li>
             </ul>
-            <Button class="projects__show">
+            <Button v-scrollAnimation class="projects__show">
                 <span>Show More</span>
             </Button>
         </section>

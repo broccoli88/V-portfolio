@@ -1,7 +1,7 @@
 <template>
     <article class="side-media">
         <figure @mouseenter="hoverIn" @mouseleave="hoverOut">
-            <a href="">
+            <a href="mailto:pawel.jaromin.protonmail.com">
                 <Icon
                     icon="entypo:email"
                     :color="color"
@@ -13,7 +13,10 @@
             </a>
         </figure>
         <figure @mouseenter="hoverIn" @mouseleave="hoverOut">
-            <a href="">
+            <a
+                href="https://pl.linkedin.com/in/pawe%C5%82-jaromin-a891a013b/en?trk=people-guest_people_search-card"
+                target="_blank"
+            >
                 <Icon
                     icon="el:linkedin"
                     :color="color"
@@ -25,7 +28,7 @@
             </a>
         </figure>
         <figure @mouseenter="hoverIn" @mouseleave="hoverOut">
-            <a href="">
+            <a href="https://github.com/broccoli88" target="_blank">
                 <Icon
                     icon="bi:git"
                     :color="color"

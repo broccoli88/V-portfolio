@@ -65,7 +65,7 @@
                     {{ v$.message.$errors[0].$message }}
                 </span>
             </section>
-            <Button class="send">
+            <Button v-scrollAnimation class="send">
                 <span>Send</span>
             </Button>
         </form>
