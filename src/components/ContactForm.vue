@@ -65,6 +65,11 @@
                     {{ v$.message.$errors[0].$message }}
                 </span>
             </section>
+            <transition name="form-confirmation" appear>
+                <span v-if="formSubmittedCorrectly" class="confirmation-message"
+                    >Message have been sent!</span
+                >
+            </transition>
             <Button v-scrollAnimation class="send">
                 <span>Send</span>
             </Button>
@@ -112,6 +117,7 @@ export default {
             errorName: false,
             errorEmail: false,
             errorMessage: false,
+            formSubmittedCorrectly: false,
         };
     },
 
@@ -134,6 +140,12 @@ export default {
     methods: {
         handleSubmit() {
             this.v$.$validate();
+            if (!this.v$.$error) {
+                this.formSubmittedCorrectly = true;
+                setTimeout(() => {
+                    this.formSubmittedCorrectly = false;
+                }, 2000);
+            }
         },
 
         outline(e) {
@@ -156,6 +168,19 @@ export default {
     flex-direction: column;
 
     position: relative;
+}
+
+.contact__form {
+    position: relative;
+}
+
+.confirmation-message {
+    color: var(--color-secondary);
+    font-weight: 600;
+
+    position: absolute;
+    bottom: 7rem;
+    left: 0;
 }
 
 .error {
@@ -220,7 +245,7 @@ export default {
 }
 
 .send {
-    margin: 2rem 10px;
+    margin: 2rem auto;
 }
 
 @media (min-width: 600px) {
@@ -253,5 +278,16 @@ export default {
     .send {
         grid-area: button;
     }
+}
+
+.form-confirmation-enter-from,
+.form-confirmation-leave-to {
+    opacity: 0;
+    transform: translateY(-10px);
+}
+
+.form-confirmation-enter-active,
+.form-confirmation-leave-active {
+    transition: all 0.3s ease;
 }
 </style>

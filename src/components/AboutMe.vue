@@ -2,28 +2,19 @@
     <article v-scrollAnimation class="about" id="about-me">
         <h2 v-scrollAnimation>About Me</h2>
         <section v-scrollAnimation class="about__description">
-            <div v-scrollAnimation class="about__text">
-                <transition name="show-text" mode="out-in">
-                    <p v-scrollAnimation v-if="!showSnippet">
-                        {{ aboutMeSnippet }}
-                    </p>
-                    <p v-else>{{ aboutMe }}</p>
-                </transition>
-                <Button
-                    v-scrollAnimation
-                    class="show-more"
-                    @click="toggleAbout"
-                >
-                    <transition name="show-text" mode="out-in">
-                        <span v-if="!showSnippet"> Show More</span>
-                        <span v-else> Show Less</span>
-                    </transition>
-                </Button>
-            </div>
-            <figure v-scrollAnimation class="about__img">
-                <img src="../assets/Pawel_Jaromin.jpeg" alt="" />
-            </figure>
+            <transition name="show-text" mode="out-in" appear>
+                <p v-if="!showSnippet">
+                    {{ aboutMeSnippet }}
+                </p>
+                <p v-else>{{ aboutMe }}</p>
+            </transition>
         </section>
+        <Button v-scrollAnimation class="show-more" @click="toggleAbout">
+            <transition name="show-text" mode="out-in">
+                <span v-if="!showSnippet"> Show More</span>
+                <span v-else> Show Less</span>
+            </transition></Button
+        >
     </article>
     <Technologies />
 </template>
@@ -81,14 +72,24 @@ export default {
 <style>
 .about {
     margin-top: 3rem;
-    position: relative;
+
     display: flex;
     flex-direction: column;
     justify-content: center;
     gap: 3rem;
 }
 
-.about::before {
+.about__description {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    position: relative;
+
+    padding: clamp(3rem, 4.5vw, 5.5rem);
+}
+
+.about__description::before {
     content: "";
     display: inline-block;
     width: 30%;
@@ -102,7 +103,7 @@ export default {
     left: -10px;
 }
 
-.about::after {
+.about__description::after {
     content: "";
     display: inline-block;
     width: 30%;
@@ -114,38 +115,6 @@ export default {
     position: absolute;
     bottom: -10px;
     right: -10px;
-}
-
-.about__description {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 3rem;
-}
-.about__description > p {
-    margin-top: 3rem;
-    width: 60ch;
-}
-
-.about__text {
-    flex: 1;
-
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
-
-.about__img {
-    flex: 1;
-    max-width: 200px;
-    height: 100%;
-    align-self: center;
-}
-
-.about__img img {
-    width: 100%;
-    object-fit: cover;
-    background-color: var(--color-primary);
 }
 
 .show-more {

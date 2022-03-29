@@ -26,6 +26,10 @@ export default {};
     transition: all 0.5s ease;
 }
 
+.button:active {
+    color: var(--color-accent);
+}
+
 button::before {
     content: "";
     display: inline-block;

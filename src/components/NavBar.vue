@@ -247,6 +247,7 @@ header {
 
 .resume {
     position: relative;
+    color: var(--color-accent);
 }
 
 .resume::before {
@@ -255,8 +256,8 @@ header {
     width: 30%;
     height: 40%;
 
-    border-top: 1px solid var(--color-primary);
-    border-left: 1px solid var(--color-primary);
+    border-top: 1px solid var(--color-accent);
+    border-left: 1px solid var(--color-accent);
 
     position: absolute;
     top: -3px;
@@ -271,11 +272,11 @@ header {
     width: 30%;
     height: 40%;
 
-    border-bottom: 1px solid var(--color-primary);
-    border-right: 1px solid var(--color-primary);
+    border-bottom: 1px solid var(--color-accent);
+    border-right: 1px solid var(--color-accent);
 
     position: absolute;
-    bottom: -3px;
+    bottom: -1px;
     right: -5px;
 
     transition: all 0.5s ease;
