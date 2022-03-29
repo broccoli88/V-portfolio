@@ -2,17 +2,24 @@
     <article class="intro" id="intro">
         <p class="intro__greeting">Hi! I'm</p>
         <h1>Pawel Jaromin</h1>
-        <h2>and coding became my passion</h2>
-        <p class="intro__description">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis,
-            quibusdam! Pariatur delectus eos hic. Adipisci quidem distinctio
-            quaerat architecto cumque.
-        </p>
+        <h2>and I'm eager for new challenges</h2>
+        <p class="intro__description">{{ intro.intro }}</p>
+        <span
+            ><br />I'm looking forward to new experiences working with You!
+        </span>
     </article>
 </template>
 
 <script>
-export default {};
+import Intro from "../../Data/intro.json";
+
+export default {
+    data() {
+        return {
+            intro: Intro,
+        };
+    },
+};
 </script>
 
 <style>
@@ -39,10 +46,15 @@ export default {};
     color: var(--color-secondary);
 }
 
+.intro > span {
+    font-weight: 500;
+    color: var(--color-secondary);
+}
+
 .intro__description {
     max-width: 80ch;
     font-size: clamp(2rem, 2.4vw, 2.7rem);
-    margin-bottom: 6rem;
+    margin-bottom: 2rem;
 }
 
 @media (min-width: 600px) {
@@ -53,6 +65,14 @@ export default {};
 
     .intro__description {
         margin-bottom: 0;
+    }
+}
+
+@media (min-width: 1250px) {
+    .intro {
+        margin-top: 4rem;
+        min-height: 100vh;
+        justify-content: flex-start;
     }
 }
 </style>

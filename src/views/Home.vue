@@ -7,6 +7,7 @@
         <Projects />
         <ContactForm />
     </main>
+
     <Footer />
     <transition name="side-bar-fade" appear>
         <SideBar v-if="showSideBar" />
@@ -48,7 +49,7 @@ export default {
     },
     methods: {
         checkSideBar() {
-            if (window.innerWidth >= 800) {
+            if (window.innerWidth >= 600) {
                 this.showSideBar = true;
                 return;
             }
@@ -97,7 +98,8 @@ main {
 }
 @media (min-width: 600px) {
     main {
-        gap: 10rem;
+        padding: clamp(7.5rem, 9vw, 10rem);
+        gap: 14rem;
     }
 }
 </style>

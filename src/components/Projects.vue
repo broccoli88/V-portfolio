@@ -76,15 +76,16 @@ export default {
 
 <style>
 .projects {
+    min-height: 100vh;
     position: relative;
 }
 .project__list {
-    margin-top: 4rem;
+    margin-top: 6rem;
     list-style: none;
 }
 .project {
     width: 100%;
-    margin-top: 4rem;
+    margin-top: 5rem;
     display: flex;
     flex-direction: column;
     gap: 3rem;
@@ -128,7 +129,7 @@ export default {
 }
 .projects__show {
     display: block;
-    margin: 10rem auto;
+    margin: 4rem auto;
 }
 @media (min-width: 600px) {
     .project__list {
@@ -137,13 +138,36 @@ export default {
         flex-wrap: wrap;
         justify-content: space-around;
     }
+
+    .project__list {
+        margin-top: 3rem;
+    }
     .project {
         width: 40%;
+    }
+
+    .buttons {
+        margin: 2rem 0;
+        gap: 2.5rem;
     }
 }
 @media (min-width: 800px) {
     .projects {
-        margin-bottom: 10rem;
+        min-height: 90vh;
+        margin-bottom: 8rem;
+    }
+}
+
+@media (min-width: 1000px) {
+    .buttons {
+        margin: 2rem;
+    }
+}
+
+@media (min-width: 1250px) {
+    .projects {
+        min-height: 100vh;
+        margin-bottom: 15rem;
     }
 }
 </style>

@@ -162,6 +162,11 @@ export default {
 </script>
 
 <style>
+.contact {
+    height: 72vh;
+    margin-bottom: 5rem;
+}
+
 .input-container {
     padding: 2px 0;
     display: flex;
@@ -236,7 +241,7 @@ export default {
 }
 
 .contact__form {
-    margin-top: 4.5rem;
+    margin-top: 6rem;
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -249,6 +254,11 @@ export default {
 }
 
 @media (min-width: 600px) {
+    .contact {
+        height: 60vh;
+        margin-bottom: 5rem;
+    }
+
     .contact__form {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
@@ -277,6 +287,13 @@ export default {
 
     .send {
         grid-area: button;
+    }
+}
+
+@media (min-width: 820px) {
+    .contact {
+        height: 65vh;
+        margin-bottom: 10rem;
     }
 }
 

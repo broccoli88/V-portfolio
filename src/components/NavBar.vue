@@ -22,11 +22,13 @@
                         <a class="link" href="#contact">Contact</a>
                     </li>
                     <li>
-                        <router-link
-                            :to="{ name: 'resume' }"
-                            class="link resume"
-                            >Resume</router-link
-                        >
+                        <transition name="router-fade">
+                            <router-link
+                                :to="{ name: 'resume' }"
+                                class="link resume"
+                                >Resume</router-link
+                            >
+                        </transition>
                     </li>
                 </ul>
             </transition>
@@ -61,13 +63,17 @@
                 <transition name="nav-slide">
                     <ul appear v-if="showNavMobile" class="nav__mobile">
                         <li>
-                            <a class="link__mobile" href="#">About Me</a>
+                            <a class="link__mobile" href="#about-me"
+                                >About Me</a
+                            >
                         </li>
                         <li>
-                            <a class="link__mobile" href="#">Projects</a>
+                            <a class="link__mobile" href="#projects"
+                                >Projects</a
+                            >
                         </li>
                         <li>
-                            <a class="link__mobile" href="#">Contact</a>
+                            <a class="link__mobile" href="#contact">Contact</a>
                         </li>
                         <li>
                             <router-link
@@ -182,6 +188,16 @@ export default {
 </script>
 
 <style>
+.router-fade-enter-from,
+.router-fade-leave-to {
+    opacity: 0;
+}
+
+.router-fade-enter-active,
+.router-fade-leave-active {
+    transition: all 1s easa;
+}
+
 .scroll-down {
     transform: translateY(-100%);
 }

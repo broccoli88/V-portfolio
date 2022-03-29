@@ -175,7 +175,7 @@ export default {
 
 @media (min-width: 800px) {
     .technologies {
-        margin: 0 auto 15rem;
+        margin: 8rem auto 8rem;
     }
 }
 </style>

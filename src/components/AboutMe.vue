@@ -3,20 +3,23 @@
         <h2 v-scrollAnimation>About Me</h2>
         <section v-scrollAnimation class="about__description">
             <transition name="show-text" mode="out-in" appear>
-                <p v-if="!showSnippet">
-                    {{ aboutMeSnippet }}
+                <p v-if="showSnippet">{{ aboutMeSnippet }}..</p>
+                <p v-else>
+                    <span>
+                        {{ aboutMeSnippet }} <br />
+                        <br />{{ aboutMeRest }}
+                    </span>
                 </p>
-                <p v-else>{{ aboutMe }}</p>
             </transition>
         </section>
         <Button v-scrollAnimation class="show-more" @click="toggleAbout">
             <transition name="show-text" mode="out-in">
-                <span v-if="!showSnippet"> Show More</span>
-                <span v-else> Show Less</span>
+                <span v-if="showSnippet"> Show More</span>
+                <span v-else> Hide </span>
             </transition></Button
         >
+        <Technologies />
     </article>
-    <Technologies />
 </template>
 
 <script>
@@ -50,7 +53,7 @@ export default {
     components: { Button, Technologies },
     data() {
         return {
-            showSnippet: false,
+            showSnippet: true,
             aboutMe: textAboutMe.aboutMe,
         };
     },
@@ -63,7 +66,11 @@ export default {
 
     computed: {
         aboutMeSnippet() {
-            return this.aboutMe.substring(0, 120) + "...";
+            return this.aboutMe.substring(0, 443);
+        },
+
+        aboutMeRest() {
+            return this.aboutMe.substring(443);
         },
     },
 };
@@ -71,6 +78,7 @@ export default {
 
 <style>
 .about {
+    min-height: 100vh;
     margin-top: 3rem;
 
     display: flex;
@@ -80,13 +88,14 @@ export default {
 }
 
 .about__description {
+    margin-top: 3rem;
     width: 100%;
     display: flex;
     flex-direction: column;
     gap: 3rem;
     position: relative;
 
-    padding: clamp(3rem, 4.5vw, 5.5rem);
+    padding: clamp(1rem, 4.5vw, 5.5rem);
 }
 
 .about__description::before {
@@ -152,10 +161,11 @@ export default {
 
 @media (min-width: 800px) {
     .about {
-        height: 23em;
+        min-height: 90vh;
     }
 
     .about__description {
+        margin-top: 6rem;
         width: 100%;
         height: 100%;
         flex-direction: row;
@@ -164,6 +174,13 @@ export default {
 
     .about__img {
         max-width: 250px;
+    }
+}
+
+@media (min-width: 1250px) {
+    .about {
+        min-height: 100vh;
+        margin-bottom: 15rem;
     }
 }
 </style>
