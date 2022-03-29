@@ -2,31 +2,40 @@
     <footer>
         <section v-scrollAnimation class="footer-media">
             <figure @mouseenter="hover" @mouseleave="withoutHover">
-                <Icon
-                    icon="entypo:email"
-                    color="#388186"
-                    width="25"
-                    height="25"
-                    :inline="true"
-                />
+                <a href="mailto:pawel.jaromin.protonmail.com">
+                    <Icon
+                        icon="entypo:email"
+                        color="#388186"
+                        width="25"
+                        height="25"
+                        :inline="true"
+                    />
+                </a>
             </figure>
             <figure @mouseenter="hover" @mouseleave="withoutHover">
-                <Icon
-                    icon="el:linkedin"
-                    color="#388186"
-                    width="25"
-                    height="25"
-                    :inline="true"
-                />
+                <a
+                    href="https://pl.linkedin.com/in/pawe%C5%82-jaromin-a891a013b/en?trk=people-guest_people_search-card"
+                    target="_blank"
+                >
+                    <Icon
+                        icon="el:linkedin"
+                        color="#388186"
+                        width="25"
+                        height="25"
+                        :inline="true"
+                    />
+                </a>
             </figure>
             <figure @mouseenter="hover" @mouseleave="withoutHover">
-                <Icon
-                    icon="bi:git"
-                    color="#388186"
-                    width="25"
-                    height="25"
-                    :inline="true"
-                />
+                <a href="https://github.com/broccoli88" target="_blank">
+                    <Icon
+                        icon="bi:git"
+                        color="#388186"
+                        width="25"
+                        height="25"
+                        :inline="true"
+                    />
+                </a>
             </figure>
         </section>
         <p v-scrollAnimation>Made by Pawel Jaromin</p>
@@ -63,11 +72,11 @@ export default {
 
     methods: {
         hover(e) {
-            const child = e.target.firstElementChild;
+            const child = e.target.firstElementChild.firstElementChild;
             child.style.color = "#a5e9e1";
         },
         withoutHover(e) {
-            const child = e.target.firstElementChild;
+            const child = e.target.firstElementChild.firstElementChild;
             child.style.color = "#388186";
         },
     },

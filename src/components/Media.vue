@@ -1,31 +1,40 @@
 <template>
     <article class="media">
         <figure @mouseenter="light" @mouseleave="dark">
-            <Icon
-                icon="entypo:email"
-                color="#388186"
-                width="30"
-                height="30"
-                :inline="true"
-            />
+            <a href="mailto:pawel.jaromin.protonmail.com">
+                <Icon
+                    icon="entypo:email"
+                    color="#388186"
+                    width="30"
+                    height="30"
+                    :inline="true"
+                />
+            </a>
         </figure>
         <figure @mouseenter="light" @mouseleave="dark">
-            <Icon
-                icon="el:linkedin"
-                color="#388186"
-                width="30"
-                height="30"
-                :inline="true"
-            />
+            <a
+                href="https://pl.linkedin.com/in/pawe%C5%82-jaromin-a891a013b/en?trk=people-guest_people_search-card"
+                target="_blank"
+            >
+                <Icon
+                    icon="el:linkedin"
+                    color="#388186"
+                    width="30"
+                    height="30"
+                    :inline="true"
+                />
+            </a>
         </figure>
         <figure @mouseenter="light" @mouseleave="dark">
-            <Icon
-                icon="bi:git"
-                color="#388186"
-                width="30"
-                height="30"
-                :inline="true"
-            />
+            <a href="https://github.com/broccoli88" target="_blank">
+                <Icon
+                    icon="bi:git"
+                    color="#388186"
+                    width="30"
+                    height="30"
+                    :inline="true"
+                />
+            </a>
         </figure>
     </article>
 </template>
@@ -38,12 +47,12 @@ export default {
 
     methods: {
         light(e) {
-            const child = e.target.firstElementChild;
+            const child = e.target.firstElementChild.firstElementChild;
             child.style.color = "#a5e9e1";
         },
 
         dark(e) {
-            const child = e.target.firstElementChild;
+            const child = e.target.firstElementChild.firstElementChild;
             child.style.color = "#388186";
         },
     },

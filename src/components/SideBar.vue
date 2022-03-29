@@ -1,34 +1,40 @@
 <template>
     <article class="side-media">
         <figure @mouseenter="hoverIn" @mouseleave="hoverOut">
-            <Icon
-                icon="entypo:email"
-                :color="color"
-                width="20"
-                height="20"
-                :inline="true"
-                class="side-icon"
-            />
+            <a href="">
+                <Icon
+                    icon="entypo:email"
+                    :color="color"
+                    width="20"
+                    height="20"
+                    :inline="true"
+                    class="side-icon"
+                />
+            </a>
         </figure>
         <figure @mouseenter="hoverIn" @mouseleave="hoverOut">
-            <Icon
-                icon="el:linkedin"
-                :color="color"
-                width="20"
-                height="20"
-                :inline="true"
-                class="side-icon"
-            />
+            <a href="">
+                <Icon
+                    icon="el:linkedin"
+                    :color="color"
+                    width="20"
+                    height="20"
+                    :inline="true"
+                    class="side-icon"
+                />
+            </a>
         </figure>
         <figure @mouseenter="hoverIn" @mouseleave="hoverOut">
-            <Icon
-                icon="bi:git"
-                :color="color"
-                width="20"
-                height="20"
-                :inline="true"
-                class="side-icon"
-            />
+            <a href="">
+                <Icon
+                    icon="bi:git"
+                    :color="color"
+                    width="20"
+                    height="20"
+                    :inline="true"
+                    class="side-icon"
+                />
+            </a>
         </figure>
     </article>
 </template>
@@ -47,12 +53,12 @@ export default {
 
     methods: {
         hoverIn(e) {
-            const child = e.target.firstElementChild;
+            const child = e.target.firstElementChild.firstElementChild;
             child.style.color = "#a5e9e1";
         },
 
         hoverOut(e) {
-            const child = e.target.firstElementChild;
+            const child = e.target.firstElementChild.firstElementChild;
             child.style.color = "#388186";
         },
     },
