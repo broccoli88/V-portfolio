@@ -46,6 +46,11 @@ export default {
     font-size: 1.5rem;
     width: 3em;
     padding: 0.2em 0.3em;
+    outline: none;
+}
+
+.side-buttons > a {
+    outline: none;
 }
 
 .tooltip {

@@ -1,7 +1,11 @@
 <template>
     <article class="side-media">
         <figure @mouseenter="hoverIn" @mouseleave="hoverOut">
-            <a href="mailto:pawel.jaromin.protonmail.com">
+            <a
+                @focus="focusIn"
+                @blur="focusOut"
+                href="mailto:pawel.jaromin.protonmail.com"
+            >
                 <Icon
                     aria-hidden="true"
                     icon="entypo:email"
@@ -15,6 +19,8 @@
         </figure>
         <figure @mouseenter="hoverIn" @mouseleave="hoverOut">
             <a
+                @blur="focusOut"
+                @focus="focusIn"
                 href="https://pl.linkedin.com/in/pawe%C5%82-jaromin-a891a013b/en?trk=people-guest_people_search-card"
                 target="_blank"
             >
@@ -30,7 +36,12 @@
             </a>
         </figure>
         <figure @mouseenter="hoverIn" @mouseleave="hoverOut">
-            <a href="https://github.com/broccoli88" target="_blank">
+            <a
+                @blur="focusOut"
+                @focus="focusIn"
+                href="https://github.com/broccoli88"
+                target="_blank"
+            >
                 <Icon
                     aria-hidden="true"
                     icon="bi:git"
@@ -66,6 +77,14 @@ export default {
         hoverOut(e) {
             const child = e.target.firstElementChild.firstElementChild;
             child.style.color = "#388186";
+        },
+
+        focusIn(e) {
+            e.target.firstElementChild.style.color = "#a5e9e1";
+        },
+
+        focusOut(e) {
+            e.target.firstElementChild.style.color = "#388186";
         },
     },
 };
@@ -120,8 +139,16 @@ export default {
     z-index: 10;
 }
 
+.side-media figure > a {
+    outline: none;
+}
+
 .side-icon {
     cursor: pointer;
+}
+
+.side-icon:focus {
+    outline: none;
 }
 
 .pointer {

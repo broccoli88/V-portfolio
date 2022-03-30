@@ -2,7 +2,11 @@
     <footer>
         <section v-scrollAnimation class="footer-media">
             <figure @mouseenter="hover" @mouseleave="withoutHover">
-                <a href="mailto:pawel.jaromin.protonmail.com">
+                <a
+                    @blur="focusOut"
+                    @focus="focusIn"
+                    href="mailto:pawel.jaromin.protonmail.com"
+                >
                     <Icon
                         aria-hidden="true"
                         icon="entypo:email"
@@ -15,6 +19,8 @@
             </figure>
             <figure @mouseenter="hover" @mouseleave="withoutHover">
                 <a
+                    @focus="focusIn"
+                    @blur="focusOut"
                     href="https://pl.linkedin.com/in/pawe%C5%82-jaromin-a891a013b/en?trk=people-guest_people_search-card"
                     target="_blank"
                 >
@@ -29,7 +35,12 @@
                 </a>
             </figure>
             <figure @mouseenter="hover" @mouseleave="withoutHover">
-                <a href="https://github.com/broccoli88" target="_blank">
+                <a
+                    @focus="focusIn"
+                    @blur="focusOut"
+                    href="https://github.com/broccoli88"
+                    target="_blank"
+                >
                     <Icon
                         aria-hidden="true"
                         icon="bi:git"
@@ -82,6 +93,13 @@ export default {
             const child = e.target.firstElementChild.firstElementChild;
             child.style.color = "#388186";
         },
+        focusIn(e) {
+            e.target.firstElementChild.style.color = "#a5e9e1";
+        },
+
+        focusOut(e) {
+            e.target.firstElementChild.style.color = "#388186";
+        },
     },
 };
 </script>
@@ -106,6 +124,11 @@ footer > p {
     display: flex;
     gap: 2.5rem;
     margin-bottom: 0.4rem;
+}
+
+.footer-media figure a,
+.footer-media figure a svg {
+    outline: none;
 }
 
 @media (min-width: 800px) {

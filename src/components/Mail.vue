@@ -3,20 +3,22 @@
         <transition name="side-buttons-fade" appear>
             <SideButtons v-if="showSideButtons" id="optionButtons" />
         </transition>
-        <p
+        <button
+            @blur="notFocused"
+            @focus="focused"
+            class="side-mail-button"
             @click="displayOptions"
-            class="mail"
             aria-controls="optionButtons"
             aria-expanded="false"
-            role="button"
         >
-            pawel.jaromin@protonmail.com
-        </p>
+            <p class="mail">pawel.jaromin@protonmail.com</p>
+        </button>
     </article>
 </template>
 
 <script>
 import SideButtons from "../components/SideButtons.vue";
+
 export default {
     components: { SideButtons },
     data() {
@@ -36,6 +38,14 @@ export default {
             } else {
                 mail.setAttribute("aria-expanded", false);
             }
+        },
+
+        focused(e) {
+            e.target.firstElementChild.style.color = "var(--color-secondary)";
+        },
+
+        notFocused(e) {
+            e.target.firstElementChild.style.color = "var(--color-font)";
         },
     },
 };
@@ -91,18 +101,39 @@ export default {
     z-index: 10;
 }
 
+.side-mail-button {
+    width: fit-content;
+    background: transparent;
+    border: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.side-mail-button::before {
+    display: none;
+}
+
+.side-mail-button::after {
+    display: none;
+}
+
+.side-mail-button:focus {
+    outline: none;
+}
+
 .mail {
-    font-size: 2rem;
-    height: 28rem;
+    color: var(--color-font);
+    font-size: 1.5rem;
+    height: 25rem;
     writing-mode: vertical-lr;
-    letter-spacing: 3px;
+    letter-spacing: 1.5px;
     line-height: 1;
     font-weight: 500;
 }
 
 .mail:hover {
-    filter: brightness(130%);
-    font-weight: 600;
+    color: var(--color-secondary);
 }
 
 @media (min-width: 1300px) {

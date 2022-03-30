@@ -1,7 +1,11 @@
 <template>
     <article class="media">
         <figure @mouseenter="light" @mouseleave="dark">
-            <a href="mailto:pawel.jaromin.protonmail.com">
+            <a
+                @blur="focusOut"
+                @focus="focusIn"
+                href="mailto:pawel.jaromin.protonmail.com"
+            >
                 <Icon
                     icon="entypo:email"
                     color="#388186"
@@ -13,6 +17,8 @@
         </figure>
         <figure @mouseenter="light" @mouseleave="dark">
             <a
+                @blur="focusOut"
+                @focus="focusIn"
                 href="https://pl.linkedin.com/in/pawe%C5%82-jaromin-a891a013b/en?trk=people-guest_people_search-card"
                 target="_blank"
             >
@@ -26,7 +32,12 @@
             </a>
         </figure>
         <figure @mouseenter="light" @mouseleave="dark">
-            <a href="https://github.com/broccoli88" target="_blank">
+            <a
+                @blur="focusOut"
+                @focus="focusIn"
+                href="https://github.com/broccoli88"
+                target="_blank"
+            >
                 <Icon
                     icon="bi:git"
                     color="#388186"
@@ -55,6 +66,14 @@ export default {
             const child = e.target.firstElementChild.firstElementChild;
             child.style.color = "#388186";
         },
+
+        focusIn(e) {
+            e.target.firstElementChild.style.color = "#a5e9e1";
+        },
+
+        focusOut(e) {
+            e.target.firstElementChild.style.color = "#388186";
+        },
     },
 };
 </script>
@@ -69,5 +88,9 @@ export default {
 
 .media > figure {
     cursor: pointer;
+}
+
+.media figure a {
+    outline: none;
 }
 </style>

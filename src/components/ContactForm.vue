@@ -4,6 +4,7 @@
         <form class="contact__form" @submit.prevent="handleSubmit">
             <section class="input-container area-name">
                 <input
+                    v-noError
                     v-model="firstName"
                     v-scrollAnimation
                     @blur="loseOutline"
@@ -13,8 +14,15 @@
                     id="name"
                     name="contact"
                     placeholder="Name"
+                    aria-invalid="false"
+                    aria-errormessage="err1"
                 />
-                <span class="error" v-if="v$.firstName.$error">
+                <span
+                    v-invalid
+                    class="error"
+                    id="err1"
+                    v-if="v$.firstName.$error"
+                >
                     {{ v$.firstName.$errors[0].$message }}
                 </span>
             </section>
@@ -34,6 +42,7 @@
             </section>
             <section class="input-container area-email">
                 <input
+                    v-noError
                     v-model="email"
                     v-scrollAnimation
                     @blur="loseOutline"
@@ -43,25 +52,36 @@
                     id="email"
                     name="contact"
                     placeholder="Email"
+                    aria-invalid="false"
+                    aria-errormessage="err2"
                 />
-                <span class="error" v-if="v$.email.$error">
+                <span v-invalid class="error" id="err2" v-if="v$.email.$error">
                     {{ v$.email.$errors[0].$message }}
                 </span>
             </section>
             <section class="input-container area-message">
                 <textarea
+                    v-noError
                     v-model="message"
                     v-scrollAnimation
                     @blur="loseOutline"
                     @focus="outline"
+                    @invalid="checkIfInvalid"
                     class="contact__input"
                     name="contact"
                     id="message"
                     cols="30"
                     rows="10"
                     placeholder="Message"
+                    aria-invalid="false"
+                    aria-errormessage="err3"
                 ></textarea>
-                <span class="error" v-if="v$.message.$error">
+                <span
+                    v-invalid
+                    class="error"
+                    id="err3"
+                    v-if="v$.message.$error"
+                >
                     {{ v$.message.$errors[0].$message }}
                 </span>
             </section>
@@ -103,8 +123,24 @@ const scrollAnimation = {
     },
 };
 
+const invalid = {
+    mounted: (el) => {
+        const error = el.previousElementSibling;
+        error.setAttribute("aria-invalid", true);
+    },
+};
+
+const noError = {
+    updated: (el) => {
+        const valid = el.nextElementSibling;
+        if (!valid) {
+            el.setAttribute("aria-invalid", false);
+        }
+    },
+};
+
 export default {
-    directives: { scrollAnimation },
+    directives: { scrollAnimation, invalid, noError },
     components: { Button },
 
     data() {
