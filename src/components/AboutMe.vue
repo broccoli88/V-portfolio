@@ -1,7 +1,12 @@
 <template>
     <article v-scrollAnimation class="about" id="about-me">
         <h2 v-scrollAnimation>About Me</h2>
-        <section v-scrollAnimation class="about__description">
+        <section
+            v-scrollAnimation
+            class="about__description"
+            id="about__description"
+            aria-expanded="false"
+        >
             <transition name="show-text" mode="out-in" appear>
                 <p v-if="showSnippet">{{ aboutMeSnippet }}..</p>
                 <p v-else>
@@ -12,9 +17,14 @@
                 </p>
             </transition>
         </section>
-        <Button v-scrollAnimation class="show-more" @click="toggleAbout">
+        <Button
+            v-scrollAnimation
+            class="show-more"
+            @click="toggleAbout"
+            aria-controls="about__description"
+        >
             <transition name="show-text" mode="out-in">
-                <span v-if="showSnippet"> Show More</span>
+                <span v-if="showSnippet"> Show More </span>
                 <span v-else> Hide </span>
             </transition></Button
         >
@@ -60,7 +70,16 @@ export default {
 
     methods: {
         toggleAbout() {
+            const checkAria = document.querySelector(".about__description");
+
             this.showSnippet = !this.showSnippet;
+            const ariaCheck = this.showSnippet;
+
+            if (ariaCheck === false) {
+                checkAria.setAttribute("aria-expanded", true);
+            } else {
+                checkAria.setAttribute("aria-expanded", false);
+            }
         },
     },
 

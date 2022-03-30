@@ -1,9 +1,17 @@
 <template>
     <article class="side-mail">
         <transition name="side-buttons-fade" appear>
-            <SideButtons v-if="showSideButtons" />
+            <SideButtons v-if="showSideButtons" id="optionButtons" />
         </transition>
-        <p @click="displayOptions" class="mail">pawel.jaromin@protonmail.com</p>
+        <p
+            @click="displayOptions"
+            class="mail"
+            aria-controls="optionButtons"
+            aria-expanded="false"
+            role="button"
+        >
+            pawel.jaromin@protonmail.com
+        </p>
     </article>
 </template>
 
@@ -19,7 +27,15 @@ export default {
 
     methods: {
         displayOptions() {
+            const mail = document.querySelector(".mail");
+
             this.showSideButtons = !this.showSideButtons;
+
+            if (this.showSideButtons === true) {
+                mail.setAttribute("aria-expanded", true);
+            } else {
+                mail.setAttribute("aria-expanded", false);
+            }
         },
     },
 };

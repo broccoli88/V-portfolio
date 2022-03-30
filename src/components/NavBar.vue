@@ -32,36 +32,48 @@
                     </li>
                 </ul>
             </transition>
-            <transition name="switch" mode="out-in">
-                <Icon
-                    @click="slideNavMobile"
-                    v-if="changeIcon"
-                    v-show="showNavIcon"
-                    icon="bx:menu-alt-right"
-                    color="#909"
-                    width="40"
-                    height="40"
-                    class="burger"
-                    :rotate="4"
-                />
-                <Icon
-                    class="close-burger"
-                    @click="hideNavMobile"
-                    v-show="showNavIcon"
-                    v-else
-                    icon="emojione-monotone:heavy-multiplication-x"
-                    color="purple"
-                    width="25"
-                    height="25"
-                    :inline="true"
-                />
-            </transition>
+            <div
+                class="mobile-menu"
+                v-show="showNavIcon"
+                aria-expanded="false"
+                aria-controls="nav__mobile"
+            >
+                <span class="sr-only">Menu</span>
+                <transition name="switch" mode="out-in" @click="checkAria">
+                    <Icon
+                        aria-hidden="true"
+                        @click="slideNavMobile"
+                        v-if="changeIcon"
+                        icon="bx:menu-alt-right"
+                        color="#909"
+                        width="40"
+                        height="40"
+                        class="burger"
+                        :rotate="4"
+                    />
+                    <Icon
+                        class="close-burger"
+                        @click="hideNavMobile"
+                        v-else
+                        icon="emojione-monotone:heavy-multiplication-x"
+                        color="purple"
+                        width="30"
+                        height="30"
+                        :inline="true"
+                    />
+                </transition>
+            </div>
             <div>
                 <transition name="nav-icons">
                     <NavLogo class="mobile__logo" v-if="showNavMobile" />
                 </transition>
                 <transition name="nav-slide">
-                    <ul appear v-if="showNavMobile" class="nav__mobile">
+                    <ul
+                        appear
+                        v-if="showNavMobile"
+                        class="nav__mobile"
+                        id="nav__mobile"
+                    >
                         <li>
                             <a class="link__mobile" href="#about-me"
                                 >About Me</a
@@ -127,6 +139,7 @@ export default {
 
     updated() {
         this.linksEntry();
+        this.checkAria();
     },
 
     methods: {
@@ -177,6 +190,16 @@ export default {
         slideNavMobile() {
             this.showNavMobile = !this.showNavMobile;
             this.changeIcon = !this.changeIcon;
+        },
+
+        checkAria() {
+            const menuExpanded = document.querySelector(".mobile-menu");
+
+            if (this.showNavMobile === true) {
+                menuExpanded.setAttribute("aria-expanded", true);
+            } else {
+                menuExpanded.setAttribute("aria-expanded", false);
+            }
         },
 
         hideNavMobile() {
@@ -349,22 +372,34 @@ header {
     }
 }
 
-.burger,
-.close-burger {
+/* .burger,
+.close-burger, */
+.mobile-menu {
     cursor: pointer;
 
     position: fixed;
     z-index: 9999;
 }
 
-.burger {
+.mobile-menu {
+    width: fit-content;
+    height: 40px;
     top: 1.5rem;
     right: 1rem;
+    border: 0;
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
+/* .burger {
+    top: 1.5rem;
+    right: 1rem;
+} */
+
 .close-burger {
-    top: 2.25rem;
-    right: 1.6rem;
+    padding-right: 0.6rem;
 }
 
 .nav-slide-enter-from {

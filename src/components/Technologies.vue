@@ -5,6 +5,7 @@
         <section v-scrollAnimation class="icons">
             <figure @mouseenter="hoverOver" @mouseleave="hoverOut">
                 <Icon
+                    aria-hidden="true"
                     icon="fontisto:html5"
                     :color="color"
                     width="50"
@@ -15,6 +16,7 @@
             </figure>
             <figure @mouseenter="hoverOver" @mouseleave="hoverOut">
                 <Icon
+                    aria-hidden="true"
                     icon="fontisto:css3"
                     :color="color"
                     width="50"
@@ -25,6 +27,7 @@
             </figure>
             <figure @mouseenter="hoverOver" @mouseleave="hoverOut">
                 <Icon
+                    aria-hidden="true"
                     icon="cib:javascript"
                     :color="color"
                     width="50"
@@ -35,6 +38,7 @@
             </figure>
             <figure @mouseenter="hoverOver" @mouseleave="hoverOut">
                 <Icon
+                    aria-hidden="true"
                     icon="akar-icons:node-fill"
                     :color="color"
                     width="50"
@@ -45,6 +49,7 @@
             </figure>
             <figure @mouseenter="hoverOver" @mouseleave="hoverOut">
                 <Icon
+                    aria-hidden="true"
                     icon="uim:vuejs"
                     :color="color"
                     width="50"
@@ -55,6 +60,7 @@
             </figure>
             <figure @mouseenter="hoverOver" @mouseleave="hoverOut">
                 <Icon
+                    aria-hidden="true"
                     icon="bi:git"
                     :color="color"
                     width="50"

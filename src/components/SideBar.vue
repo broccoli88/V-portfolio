@@ -3,6 +3,7 @@
         <figure @mouseenter="hoverIn" @mouseleave="hoverOut">
             <a href="mailto:pawel.jaromin.protonmail.com">
                 <Icon
+                    aria-hidden="true"
                     icon="entypo:email"
                     :color="color"
                     width="20"
@@ -18,6 +19,7 @@
                 target="_blank"
             >
                 <Icon
+                    aria-hidden="true"
                     icon="el:linkedin"
                     :color="color"
                     width="20"
@@ -30,6 +32,7 @@
         <figure @mouseenter="hoverIn" @mouseleave="hoverOut">
             <a href="https://github.com/broccoli88" target="_blank">
                 <Icon
+                    aria-hidden="true"
                     icon="bi:git"
                     :color="color"
                     width="20"

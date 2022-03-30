@@ -4,6 +4,7 @@
             <figure @mouseenter="hover" @mouseleave="withoutHover">
                 <a href="mailto:pawel.jaromin.protonmail.com">
                     <Icon
+                        aria-hidden="true"
                         icon="entypo:email"
                         color="#388186"
                         width="25"
@@ -18,6 +19,7 @@
                     target="_blank"
                 >
                     <Icon
+                        aria-hidden="true"
                         icon="el:linkedin"
                         color="#388186"
                         width="25"
@@ -29,6 +31,7 @@
             <figure @mouseenter="hover" @mouseleave="withoutHover">
                 <a href="https://github.com/broccoli88" target="_blank">
                     <Icon
+                        aria-hidden="true"
                         icon="bi:git"
                         color="#388186"
                         width="25"

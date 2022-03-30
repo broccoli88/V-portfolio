@@ -1,6 +1,10 @@
 <template>
     <figure class="logo-small">
-        <a href="#intro"> <img src="../assets/Logo1.svg" alt="" /></a>
+        <a href="#intro">
+            <img
+                src="../assets/Logo1.svg"
+                alt="Logo with teal capital P and J letters"
+        /></a>
     </figure>
 </template>
 
