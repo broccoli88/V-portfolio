@@ -108,6 +108,11 @@ export default {
     display: flex;
     align-items: center;
     justify-content: center;
+    cursor: pointer;
+}
+
+.side-mail-button:hover {
+    color: var(--color-secondary);
 }
 
 .side-mail-button::before {

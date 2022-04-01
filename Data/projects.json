@@ -1,24 +1,33 @@
 {
   "projects": [
     {
-      "title": "TicTacToe",
-      "body": " Lorem ipsum dolor sit ametconsectetur, adipisicingelit. Natus eius voluptate explicabo. Atque asperiores odit",
-      "technologies": "JS, Vue"
+      "title": "Homey Goat",
+      "body": "Website for a miniature painting studio  ",
+      "technologies": "HTML, CSS, JavaScript",
+      "liveAppLink": "https://homey-goat.netlify.app",
+      "gitLink": "https://github.com/broccoli88/Homey_Goat"
     },
     {
-      "title": "Carousel",
-      "body": " Lorem ipsum dolor sit ametconsectetur, adipisicingelit. Natus eius voluptate explicabo. Atque asperiores odit",
-      "technologies": "JS, Vue"
+      "title": "Book Library",
+      "body": "Project to store list of books with adding, sorting in descending and ascending order functionality, marking favorites and finished books",
+      "technologies": "JS, Vue",
+      "liveAppLink": "https://pawel-jaromin-book-library.vercel.app/",
+      "gitLink": "https://github.com/broccoli88/vue-book-library"
     },
+    {
+      "title": "Memory Game",
+      "body": "Enjoyable game for kids with nice animal icons",
+      "technologies": "HTML, CSS, JavaScript",
+      "liveAppLink": "https://memory-game-by-pawel-jaromin.netlify.app",
+      "gitLink": "https://github.com/broccoli88/Memory-game"
+    },
+
     {
       "title": "Library",
       "body": " Lorem ipsum dolor sit ametconsectetur, adipisicingelit. Natus eius voluptate explicabo. Atque asperiores odit",
-      "technologies": "JS, Vue"
-    },
-    {
-      "title": "Library",
-      "body": " Lorem ipsum dolor sit ametconsectetur, adipisicingelit. Natus eius voluptate explicabo. Atque asperiores odit",
-      "technologies": "JS, Vue"
+      "technologies": "JS, Vue",
+      "liveAppLink": "",
+      "gitLink": ""
     }
   ]
 }

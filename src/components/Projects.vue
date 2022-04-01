@@ -18,12 +18,16 @@
                         >{{ project.technologies }}
                     </p>
                     <div class="buttons">
-                        <Button v-scrollAnimation>
-                            <span>Live App</span>
-                        </Button>
-                        <Button v-scrollAnimation>
-                            <span>Git</span>
-                        </Button>
+                        <a :href="project.liveAppLink" target="_blank">
+                            <Button v-scrollAnimation class="project-button">
+                                Live App
+                            </Button>
+                        </a>
+                        <a :href="project.gitLink" target="_blank">
+                            <Button class="project-button" v-scrollAnimation>
+                                <span>Git</span>
+                            </Button>
+                        </a>
                     </div>
                 </li>
             </ul>
@@ -88,9 +92,11 @@ export default {
     margin-top: 5rem;
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
     gap: 3rem;
     position: relative;
 }
+
 .project::before {
     content: "";
     display: inline-block;
@@ -124,9 +130,10 @@ export default {
 .buttons {
     margin: 2rem;
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     gap: 5rem;
 }
+
 .projects__show {
     display: block;
     margin: 4rem auto;
@@ -149,6 +156,10 @@ export default {
     .buttons {
         margin: 2rem 0;
         gap: 2.5rem;
+    }
+
+    .project-button {
+        width: 5em;
     }
 }
 @media (min-width: 800px) {

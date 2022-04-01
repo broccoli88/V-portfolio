@@ -6,7 +6,7 @@
             <Button @click="ETGoHome">Home</Button>
             <a
                 class="download"
-                href="../../public/files/resume-example.jpg"
+                href="https://mega.nz/file/yR82RLjI#q60mqHG-IHyGjZ-GJv32s-fjlSZIl4ph1M-HVKrQuWc"
                 download
             >
                 <Button>Download</Button>

@@ -309,6 +309,10 @@ export default {
         grid-area: name;
     }
 
+    .area-name {
+        background: inherit;
+    }
+
     .area-last-name {
         grid-area: lastname;
     }
