@@ -3,7 +3,6 @@
         <h2 v-scrollAnimation>Contact me</h2>
         <form
             class="contact__form"
-            @click.prevent="handleSubmit"
             action="https://formsubmit.co/pawel.jaromin@protonmail.com"
             method="POST"
         >
@@ -183,15 +182,15 @@ export default {
     },
 
     methods: {
-        handleSubmit() {
-            this.v$.$validate();
-            if (!this.v$.$error) {
-                this.formSubmittedCorrectly = true;
-                setTimeout(() => {
-                    this.formSubmittedCorrectly = false;
-                }, 2000);
-            }
-        },
+        // handleSubmit() {
+        //     this.v$.$validate();
+        //     if (!this.v$.$error) {
+        //         this.formSubmittedCorrectly = true;
+        //         setTimeout(() => {
+        //             this.formSubmittedCorrectly = false;
+        //         }, 2000);
+        //     }
+        // },
 
         outline(e) {
             const parent = e.target.parentElement;
