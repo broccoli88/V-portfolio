@@ -13,8 +13,7 @@
                         {{ project.body }}
                     </p>
                     <p v-scrollAnimation>
-                        <span class="project__technologies-used"
-                            >Used tools: </span
+                        <span class="project__technologies-used">Used: </span
                         >{{ project.technologies }}
                     </p>
                     <div class="buttons">
@@ -31,9 +30,9 @@
                     </div>
                 </li>
             </ul>
-            <Button v-scrollAnimation class="projects__show">
+            <!-- <Button v-scrollAnimation class="projects__show">
                 <span>Show More</span>
-            </Button>
+            </Button> -->
         </section>
     </article>
 </template>

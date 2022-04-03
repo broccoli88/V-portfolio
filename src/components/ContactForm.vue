@@ -1,8 +1,14 @@
 <template>
     <article class="contact" id="contact">
         <h2 v-scrollAnimation>Contact me</h2>
-        <form class="contact__form" @submit.prevent="handleSubmit">
+        <form
+            class="contact__form"
+            @submit.prevent="handleSubmit"
+            action="https://formsubmit.co/pawel.jaromin@protonmail.com"
+            method="POST"
+        >
             <section class="input-container area-name">
+                <label for="name" class="sr-only">First Name</label>
                 <input
                     v-noError
                     v-model="firstName"
@@ -28,6 +34,7 @@
             </section>
 
             <section class="input-container area-last-name">
+                <label for="last-name" class="sr-only">Last Name</label>
                 <input
                     v-model="lastName"
                     v-scrollAnimation
@@ -41,6 +48,7 @@
                 />
             </section>
             <section class="input-container area-email">
+                <label for="email" class="sr-only">Email</label>
                 <input
                     v-noError
                     v-model="email"
@@ -60,6 +68,7 @@
                 </span>
             </section>
             <section class="input-container area-message">
+                <label for="message" class="sr-only">Message</label>
                 <textarea
                     v-noError
                     v-model="message"
