@@ -3,7 +3,7 @@
         <h2 v-scrollAnimation>Contact me</h2>
         <form
             class="contact__form"
-            @submit.prevent="handleSubmit"
+            @click.prevent="handleSubmit"
             action="https://formsubmit.co/pawel.jaromin@protonmail.com"
             method="POST"
         >
@@ -99,7 +99,7 @@
                     >Message have been sent!</span
                 >
             </transition>
-            <Button v-scrollAnimation class="send">
+            <Button v-scrollAnimation class="send" type="submit">
                 <span>Send</span>
             </Button>
         </form>
