@@ -7,6 +7,13 @@
             method="POST"
             action="https://formsubmit.co/jaromin.pawel@protonmail.com"
         >
+            <!-- REDIRECT -->
+            <input
+                type="hidden"
+                name="_next"
+                value="https://v-portfolio-pj.vercel.app/asdasd"
+            />
+
             <!-- HONEYPOT -->
             <input type="text" name="_honey" style="display: none" />
 
