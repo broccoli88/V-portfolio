@@ -1,13 +1,15 @@
 <template>
-    <article class="intro" id="intro">
-        <p class="intro__greeting">Hi! I'm</p>
-        <h1>Pawel Jaromin</h1>
-        <h2>and I'm eager for new challenges</h2>
-        <p class="intro__description">{{ intro.intro }}</p>
-        <span
-            ><br />I'm looking forward to new experiences working with You!
-        </span>
-    </article>
+    <transition name="first-show" appear>
+        <article class="intro" id="intro">
+            <p class="intro__greeting">Hi! I'm</p>
+            <h1>Pawel Jaromin</h1>
+            <h2>and I'm eager for new challenges</h2>
+            <p class="intro__description">{{ intro.intro }}</p>
+            <span
+                ><br />I'm looking forward to new experiences working with You!
+            </span>
+        </article>
+    </transition>
 </template>
 
 <script>
@@ -74,5 +76,16 @@ export default {
         min-height: 100vh;
         justify-content: flex-start;
     }
+}
+
+.first-show-enter-from,
+.first-show-leave-to {
+    opacity: 0;
+    transform: translateY(60px);
+}
+
+.first-show-enter-active,
+.first-show-leave-active {
+    transition: all 0.7s ease;
 }
 </style>
