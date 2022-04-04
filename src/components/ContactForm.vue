@@ -11,7 +11,7 @@
             <input
                 type="hidden"
                 name="_next"
-                value="https://v-portfolio-pj.vercel.app/asdasd"
+                value="https://v-portfolio-pj.vercel.app/form-submitted"
             />
 
             <!-- HONEYPOT -->
