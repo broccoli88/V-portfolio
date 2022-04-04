@@ -2,9 +2,10 @@
     <article class="contact" id="contact">
         <h2 v-scrollAnimation>Contact me</h2>
         <form
-            @submit.prevent="handleSubmit"
+            @submit="handleSubmit"
             class="contact__form"
             method="POST"
+            action="https://formsubmit.co/jaromin.pawel@protonmail.com"
         >
             <!-- HONEYPOT -->
             <input type="text" name="_honey" style="display: none" />
