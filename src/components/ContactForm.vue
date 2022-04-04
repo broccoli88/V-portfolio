@@ -4,7 +4,6 @@
         <form
             @submit.prevent="handleSubmit"
             class="contact__form"
-            action="https://formsubmit.co/jaromin.pawel@protonmail.com"
             method="POST"
         >
             <!-- HONEYPOT -->
@@ -112,6 +111,7 @@
     </article>
 </template>
 
+
 <script>
 import Button from "./Button.vue";
 import useVuelidate from "@vuelidate/core";
@@ -119,9 +119,9 @@ import { required, email, minLength, maxLength } from "@vuelidate/validators";
 
 const scrollAnimation = {
     mounted: (el) => {
-        let option = {
+        let options = {
             root: null,
-            rootMargin: "-150px",
+            rootMargin: "0px",
             threshold: 0,
         };
 
@@ -130,6 +130,7 @@ const scrollAnimation = {
                 entries.forEach((entry) => {
                     if (!entry.isIntersecting) return;
                     el.classList.toggle("on-entry");
+
                     animationObserver.unobserve(el);
                 });
             }
@@ -197,6 +198,16 @@ export default {
                     this.formSubmittedCorrectly = false;
                 }, 2000);
             }
+
+            $.ajax({
+                url: "https://formsubmit.co/ajax/jaromin.pawel@protonmail.com",
+                method: "POST",
+                data: {
+                    name: "FormSubmit",
+                    message: "Your message was send",
+                },
+                dataType: "json",
+            });
         },
 
         outline(e) {
