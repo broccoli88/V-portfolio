@@ -2,12 +2,19 @@ import { createRouter, createWebHistory } from "vue-router";
 import Home from "../views/Home.vue";
 import Resume from "../views/ResumePage.vue";
 import PageNotFound from "../views/PageNotFound.vue";
+import FormSubmitted from "../views/FormSubmitted.vue";
 
 const routes = [
   {
     path: "/",
     name: "home",
     component: Home,
+  },
+
+  {
+    path: "/form-submitted",
+    name: "submitted",
+    component: FormSubmitted,
   },
 
   {

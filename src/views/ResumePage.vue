@@ -8,6 +8,7 @@
                 class="download"
                 href="https://mega.nz/file/yR82RLjI#q60mqHG-IHyGjZ-GJv32s-fjlSZIl4ph1M-HVKrQuWc"
                 download
+                target="_blank"
             >
                 <Button>Download</Button>
             </a>
