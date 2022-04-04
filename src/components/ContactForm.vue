@@ -2,10 +2,17 @@
     <article class="contact" id="contact">
         <h2 v-scrollAnimation>Contact me</h2>
         <form
+            @submit.prevent="handleSubmit"
             class="contact__form"
             action="https://formsubmit.co/jaromin.pawel@protonmail.com"
             method="POST"
         >
+            <!-- HONEYPOT -->
+            <input type="text" name="_honey" style="display: none" />
+
+            <!-- DISABLE CAPTCH -->
+            <input type="hidden" name="_captcha" value="false" />
+
             <section class="input-container area-name">
                 <label for="name" class="sr-only">First Name</label>
                 <input
@@ -182,15 +189,15 @@ export default {
         };
     },
     methods: {
-        // handleSubmit() {
-        //     this.v$.$validate();
-        //     if (!this.v$.$error) {
-        //         this.formSubmittedCorrectly = true;
-        //         setTimeout(() => {
-        //             this.formSubmittedCorrectly = false;
-        //         }, 2000);
-        //     }
-        // },
+        handleSubmit() {
+            this.v$.$validate();
+            if (!this.v$.$error) {
+                this.formSubmittedCorrectly = true;
+                setTimeout(() => {
+                    this.formSubmittedCorrectly = false;
+                }, 2000);
+            }
+        },
 
         outline(e) {
             const parent = e.target.parentElement;
