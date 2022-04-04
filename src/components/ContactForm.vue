@@ -17,7 +17,7 @@
                     class="contact__input"
                     type="text"
                     id="name"
-                    name="contact"
+                    name="Name"
                     placeholder="Name"
                     aria-invalid="false"
                     aria-errormessage="err1"
@@ -42,7 +42,7 @@
                     class="contact__input"
                     type="text"
                     id="last-name"
-                    name="contact"
+                    name="Last Name"
                     placeholder="Last name"
                 />
             </section>
@@ -57,7 +57,7 @@
                     class="contact__input"
                     type="text"
                     id="email"
-                    name="contact"
+                    name="Email"
                     placeholder="Email"
                     aria-invalid="false"
                     aria-errormessage="err2"
@@ -76,7 +76,7 @@
                     @focus="outline"
                     @invalid="checkIfInvalid"
                     class="contact__input"
-                    name="contact"
+                    name="Message"
                     id="message"
                     cols="30"
                     rows="10"
@@ -162,6 +162,7 @@ export default {
             errorEmail: false,
             errorMessage: false,
             formSubmittedCorrectly: false,
+            formContent: {},
         };
     },
 
@@ -181,7 +182,6 @@ export default {
         };
     },
     methods: {
-        // @click.prevent="handleSubmit"
         // handleSubmit() {
         //     this.v$.$validate();
         //     if (!this.v$.$error) {
