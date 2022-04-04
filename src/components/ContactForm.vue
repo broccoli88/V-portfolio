@@ -17,6 +17,7 @@
                 <label for="name" class="sr-only">First Name</label>
                 <input
                     required
+                    placeholder="First Name"
                     v-noError
                     v-model="firstName"
                     v-scrollAnimation
@@ -200,16 +201,6 @@ export default {
                     this.formSubmittedCorrectly = false;
                 }, 2000);
             }
-
-            $.ajax({
-                url: "https://formsubmit.co/ajax/jaromin.pawel@protonmail.com",
-                method: "POST",
-                data: {
-                    name: "FormSubmit",
-                    message: "Your message was send",
-                },
-                dataType: "json",
-            });
         },
 
         outline(e) {
