@@ -16,6 +16,7 @@
             <section class="input-container area-name">
                 <label for="name" class="sr-only">First Name</label>
                 <input
+                    required
                     v-noError
                     v-model="firstName"
                     v-scrollAnimation
@@ -25,8 +26,6 @@
                     type="text"
                     id="name"
                     name="Name"
-                    placeholder="Name"
-                    aria-invalid="false"
                     aria-errormessage="err1"
                 />
                 <span
@@ -56,6 +55,7 @@
             <section class="input-container area-email">
                 <label for="email" class="sr-only">Email</label>
                 <input
+                    required
                     v-noError
                     v-model="email"
                     v-scrollAnimation
@@ -76,6 +76,7 @@
             <section class="input-container area-message">
                 <label for="message" class="sr-only">Message</label>
                 <textarea
+                    required
                     v-noError
                     v-model="message"
                     v-scrollAnimation
